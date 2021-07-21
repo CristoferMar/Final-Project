@@ -20,6 +20,17 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.post('/api/lists/new-list', (req, res, next) => {
+  console.log('req.body:', req.body);
+
+  const { listName, userId } = req.body;
+  const validName = listName.split(' ').join('');
+  if (!validName) {
+    throw new ClientError(400, 'A valid list name is required');
+  }
+  if (!userId) {
+    console.error('no user in POST for new list');
+    throw new ClientError(500, 'an unexpected error occurred');
+  }
 
 });
 
