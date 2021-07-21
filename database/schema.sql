@@ -5,12 +5,11 @@ set client_min_messages to warning;
 drop schema "public" cascade;
 
 create schema "public";
-
-CREATE TABLE "public.users" (
+CREATE TABLE "public"."users" (
 	"userId" serial NOT NULL,
 	"userName" TEXT NOT NULL UNIQUE,
 	"password" TEXT NOT NULL,
-	"createdAt" timestamp with time zone NOT NULL,
+	"createdAt" timestamp with time zone NOT NULL default now(),
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE
@@ -18,11 +17,11 @@ CREATE TABLE "public.users" (
 
 
 
-CREATE TABLE "public.lists" (
+CREATE TABLE "public"."lists" (
 	"listId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"listTitle" TEXT NOT NULL,
-	"createdAt" timestamp with time zone NOT NULL,
+	"createdAt" timestamp with time zone NOT NULL default now(),
 	CONSTRAINT "lists_pk" PRIMARY KEY ("listId")
 ) WITH (
   OIDS=FALSE
@@ -30,7 +29,7 @@ CREATE TABLE "public.lists" (
 
 
 
-CREATE TABLE "public.dates" (
+CREATE TABLE "public"."dates" (
 	"itemId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"listId" integer NOT NULL,
@@ -43,10 +42,10 @@ CREATE TABLE "public.dates" (
 
 
 
-CREATE TABLE "public.history" (
+CREATE TABLE "public"."history" (
 	"itemId" integer NOT NULL,
 	"userId" integer NOT NULL,
-	"addedAt" timestamp with time zone NOT NULL
+	"addedAt" timestamp with time zone NOT NULL default now()
 ) WITH (
   OIDS=FALSE
 );
