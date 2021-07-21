@@ -20,8 +20,6 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.post('/api/lists/new-list', (req, res, next) => {
-  console.log('req.body:', req.body);
-
   const { listName, userId } = req.body;
   const validName = listName.split(' ').join('');
   if (!validName) {
@@ -31,6 +29,21 @@ app.post('/api/lists/new-list', (req, res, next) => {
     console.error('no user in POST for new list');
     throw new ClientError(500, 'an unexpected error occurred');
   }
+
+  const sql = `
+    insert into "lists" ("listTitle", "userId")
+    values ($1, $2)
+    returning "listTitle", "listId"
+  `;
+  const params = [listName, userId];
+
+  db.query(sql, params)
+    .then(result => {
+      const message = result.rows[0];
+      res.status(201).json(message);
+
+    })
+    .catch(err => next(err));
 
 });
 
