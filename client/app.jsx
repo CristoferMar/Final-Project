@@ -13,6 +13,31 @@ export default class App extends React.Component {
     this.handleCancel = this.handleCancel.bind(this);
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    this.setState({ listName: '' });
+  }
+
+  handleSubmit() {
+    event.preventDefault();
+    const req = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        listName: this.state.listName,
+        userId: this.state.userId
+      })
+    };
+    fetch('/api/lists/new-list', req)
+      .then(res => res.json())
+      .then(this.setState({ listName: '' }));
+  }
+
   render() {
     return (
       <div className="page align-center">
