@@ -1,12 +1,10 @@
 import React from 'react';
-// import Home from './pages/home';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listName: '',
-      userId: 1
+      listName: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,20 +27,19 @@ export default class App extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        listName: this.state.listName,
-        userId: this.state.userId
+        listName: this.state.listName
       })
     };
-    fetch('/api/lists/new-list', req)
+    fetch('/api/lists', req)
       .then(res => res.json())
-      .then(this.setState({ listName: '' }));
+      .then(() => this.setState({ listName: '' }));
   }
 
   render() {
     return (
       <div className="page align-center">
         <div className="form-container">
-          <form className="center-content column" action="" onSubmit={this.handleSubmit}>
+          <form className="margin-auto" action="" onSubmit={this.handleSubmit}>
             <h3 className="form-title">Create A New List</h3>
             <label htmlFor="listName">Name of New List</label>
             <input
