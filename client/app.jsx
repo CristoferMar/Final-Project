@@ -5,30 +5,13 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listName: ''
+      listName: '',
+      userId: 1
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
-
-  // handleChange(event) {
-  //   const { name, value } = event.target;
-  //   this.setState({ [name]: value });
-  // }
-
-  // handleCancel(event) {
-  //   event.preventDefault();
-  //   this.setState({ listName: '' });
-  //   console.log('cancel has been hit');
-  //   App.form.reset();
-  // }
-
-  // handleSubmit(event) {
-  //   event.preventDefault();
-  //   console.log("We've hit the submit button:", event);
-  //   console.log();
-  // }
 
   render() {
     return (
@@ -45,10 +28,11 @@ export default class App extends React.Component {
               id="listName"
               required
               onChange={this.handleChange}
+              value={this.state.listName}
             />
             <div className="center-content space-between">
-              <button className="form-btn purple" onClick={this.handleCancel}>Cancel</button>
-              <input type="submit" className="form-btn blue" value="Save" />
+              <button className="form-btn purple click" onClick={this.handleCancel}>Cancel</button>
+              <input type="submit" className="form-btn blue click" value="Save" />
             </div>
           </form>
         </div>

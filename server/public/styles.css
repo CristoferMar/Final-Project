@@ -42,10 +42,11 @@
   padding: 5px;
   border-radius: 4px;
   margin-bottom: 0.7rem;
+  color: rgb(12, 0, 83);
 }
 
 .text-box:focus {
-  outline-color: #3198fc;
+  outline-color: #9320e0;
 }
 
 .form-btn {
@@ -63,4 +64,8 @@
 
 .blue {
   background: #3198fc;
+}
+
+.click {
+  cursor: pointer;
 }
