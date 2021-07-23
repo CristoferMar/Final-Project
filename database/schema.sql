@@ -22,6 +22,7 @@ CREATE TABLE "public"."lists" (
 	"userId" integer NOT NULL,
 	"listTitle" TEXT NOT NULL,
 	"createdAt" timestamp with time zone NOT NULL default now(),
+  "isPublic" BOOLEAN NOT NULL DEFAULT 'false',
 	CONSTRAINT "lists_pk" PRIMARY KEY ("listId")
 ) WITH (
   OIDS=FALSE
