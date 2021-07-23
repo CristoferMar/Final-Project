@@ -42,6 +42,22 @@ app.post('/api/lists', (req, res, next) => {
 
 });
 
+app.get('/api/lists', (req, res, next) => {
+  const sql = `
+    select "listId", "listTitle", "isPublic"
+    from "lists"
+    where "userId" = 1
+    order by "listId" desc;
+  `;
+  const params = [];
+  db.query(sql, params)
+    .then(result => {
+      const message = { rows: result.rows };
+      res.status(201).json(message);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
