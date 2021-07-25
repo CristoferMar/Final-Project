@@ -1,7 +1,7 @@
 .page {
   min-height: 100vh;
-  background: rgb(147, 32, 224);
-  background: linear-gradient(0deg, rgba(147, 32, 224, 1) 0%, rgba(12, 0, 83, 1) 100%);
+  background: rgb(12, 0, 83);
+  background: linear-gradient(180deg, rgba(12, 0, 83, 1) 10%, rgba(147, 32, 224, 1) 100%);
   display: flex;
   justify-content: center;
 }
@@ -70,6 +70,10 @@
   background: #3198fc;
 }
 
+.red-fill {
+  background: #ed105b;
+}
+
 .blue {
   color: #3198fc;
 }
@@ -78,16 +82,25 @@
   color: #9320e0;
 }
 
+.red {
+  color: #ed105b;
+}
+
 .click {
   cursor: pointer;
 }
 
+.click:active {
+  transform: translateY(2px);
+}
+
 .nav-bar {
   background: rgb(12, 0, 83);
-  height: 45px;
-  padding: 5px;
+  height: 55px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .small-logo {
@@ -106,4 +119,27 @@
 
 .weight-800 {
   font-weight: 800;
+}
+
+.absolute {
+  position: absolute;
+  background: #0c0053;
+  padding: 10px 20px;
+  padding-top: 0;
+  width: 170px;
+  right: 0;
+  top: 54px;
+  text-align: right;
+  border-radius: 0 0 0 20px;
+  font-weight: 600;
+}
+
+.drawer-close {
+  display: none;
+}
+
+.drawer-close,
+.drawer-open {
+  /* animation to be added here, for app drawer
+  transition: transform 350ms ease-out; */
 }
