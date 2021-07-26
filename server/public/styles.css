@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+.with-navbar {
+  min-height: calc(100vh - 55px);
+}
+
 .align-center {
   align-items: center;
 }
@@ -18,10 +22,8 @@
 }
 
 .form-title {
-  margin: 0;
   text-align: center;
   margin-bottom: 0.7rem;
-  font-weight: 400;
 }
 
 .margin-auto {
@@ -31,6 +33,10 @@
 .center-content {
   display: flex;
   justify-content: center;
+}
+
+.flex {
+  display: flex;
 }
 
 .full-width {
@@ -121,25 +127,27 @@
   font-weight: 800;
 }
 
-.absolute {
-  position: absolute;
-  background: #0c0053;
-  padding: 10px 20px;
-  padding-top: 0;
-  width: 170px;
-  right: 0;
-  top: 54px;
-  text-align: right;
-  border-radius: 0 0 0 20px;
-  font-weight: 600;
+.height-25 {
+  height: 25px;
 }
 
-.drawer-close {
-  display: none;
+.padding-10 {
+  padding: 10px;
 }
 
-.drawer-close,
-.drawer-open {
-  /* animation to be added here, for app drawer
-  transition: transform 350ms ease-out; */
+.font-light {
+  font-weight: 200;
+}
+
+.width-76-percent {
+  max-width: 76%;
+}
+
+.width-23-percent {
+  /* min-width: 19%; */
+  width: 23%;
+}
+
+.max-height-31 {
+  max-height: 31px;
 }

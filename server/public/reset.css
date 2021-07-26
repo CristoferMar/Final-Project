@@ -7,3 +7,12 @@ body {
   margin: 0;
   color: white;
 }
+
+h3 {
+  margin: 0;
+  font-weight: 400;
+}
+
+p {
+  margin: 0;
+}
