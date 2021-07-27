@@ -8,19 +8,18 @@ export default class UserLists extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   const req = {
-  //     method: 'GET',
-  //     header: { 'Content-Type': 'application/json' }
-  //   };
-  //   fetch('/api/lists', req)
-  //     .then(res => res.json())
-  //     .then(userLists => {
-  //       this.setState({ userLists });
-  //       console.log(this.state.userLists);
-  //     })
-  //     .catch(err => console.error(err));
-  // }
+  componentDidMount() {
+    const req = {
+      method: 'GET',
+      header: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/lists', req)
+      .then(res => res.json())
+      .then(userLists => {
+        this.setState({ userLists });
+      })
+      .catch(err => console.error(err));
+  }
 
   render() {
     return (
@@ -30,11 +29,14 @@ export default class UserLists extends React.Component {
             <img className="height-25 click" src="images/add-list-btn.svg" alt="add new list" />
           </div>
 
-          {/* {
-          this.state.userLists === 0 &&
-          <div className="flex full-width space-between">You have no lists at the moment.</div>
-          } */}
           {
+            this.state.userLists.length === 0 &&
+              <div className="content-center full-width padding-10">
+                  You have no lists at the moment.
+              </div>
+          }
+          {
+            this.state.userLists.length > 0 &&
             this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-10">
               <div className="flex full-width space-between">
