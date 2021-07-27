@@ -3,13 +3,14 @@ import React from 'react';
 export default class Navbar extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      location: props.location
+      path: props.path
     };
   }
 
   render() {
-    let title = this.state.location;
+    let title = this.state.path;
     title = title.replace('-', ' ');
     return (
       <div className='nav-bar'>

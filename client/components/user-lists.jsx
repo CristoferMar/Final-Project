@@ -26,7 +26,9 @@ export default class UserLists extends React.Component {
         <div className="padding-10 width-responsive">
           <div className="flex full-width align-center space-between">
             <h3>Create A New List</h3>
-            <img className="height-25 click" src="images/add-list-btn.svg" alt="add new list" />
+            <a href="#New-List">
+              <img className="height-25 click" src="images/add-list-btn.svg" alt="add new list" />
+            </a>
           </div>
 
           {
