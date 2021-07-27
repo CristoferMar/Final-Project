@@ -19,7 +19,6 @@ export default class NewListForm extends React.Component {
   handleCancel(event) {
     event.preventDefault();
     window.location.hash = 'My-Lists';
-    this.setState({ listName: '' });
   }
 
   handleSubmit() {

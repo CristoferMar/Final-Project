@@ -1,14 +1,13 @@
 import React from 'react';
-import Navbar from './components/nab-bar';
+import Navbar from './components/nav-bar';
 import UserLists from './components/user-lists';
 import parseRoute from './lib/parse-route';
-import NewListForm from './components/newList-Form';
+import NewListForm from './components/new-list-form';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      navbar: true,
       route: parseRoute(window.location.hash)
     };
   }
@@ -31,16 +30,13 @@ export default class App extends React.Component {
 
   render() {
     const { path } = this.state.route;
-    let background = 'page';
-    this.state.navbar ? background = 'page with-navbar' : background = 'page';
-
     return (
       <>
         {path !== 'New-List' &&
           <Navbar path={path} />
         }
 
-        <div className={background}>
+        <div className="page with-navbar">
           {this.renderPage(this.state.route)}
         </div>
       </>
