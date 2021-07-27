@@ -52,8 +52,7 @@ app.get('/api/lists', (req, res, next) => {
   const params = [];
   db.query(sql, params)
     .then(result => {
-      const message = { rows: result.rows };
-      res.status(201).json(message);
+      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });
