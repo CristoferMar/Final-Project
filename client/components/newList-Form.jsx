@@ -33,13 +33,14 @@ export default class NewListForm extends React.Component {
     };
     fetch('/api/lists', req)
       .then(res => res.json())
-      .then(() => this.setState({ listName: '' }));
-    window.location.hash = 'My-Lists';
+      .then(() => {
+        window.location.hash = 'My-Lists';
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
     return (
-
         <div className="full-width full-height center-content align-center">
           <div className="form-container">
             <form className="margin-auto" action="" onSubmit={this.handleSubmit}>
@@ -64,7 +65,6 @@ export default class NewListForm extends React.Component {
             </form>
           </div>
         </div>
-
     );
   }
 }
