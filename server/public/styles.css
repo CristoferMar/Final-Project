@@ -10,6 +10,10 @@
   min-height: calc(100vh - 55px);
 }
 
+.flex {
+  display: flex;
+}
+
 .align-center {
   align-items: center;
 }
@@ -35,10 +39,6 @@
   justify-content: center;
 }
 
-.flex {
-  display: flex;
-}
-
 .full-width {
   width: 100%;
 }
@@ -55,8 +55,15 @@
   width: 100%;
   padding: 5px;
   border-radius: 4px;
-  margin-bottom: 0.7rem;
   color: rgb(12, 0, 83);
+}
+
+.margin-bottom-7rm {
+  margin-bottom: 0.7rem;
+}
+
+.width-70-precent {
+  width: 70%;
 }
 
 .text-box:focus {

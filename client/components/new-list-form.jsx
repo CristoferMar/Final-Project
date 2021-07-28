@@ -48,7 +48,7 @@ export default class NewListForm extends React.Component {
               <input
                 autoFocus
                 type="text"
-                className="text-box"
+                className="text-box margin-bottom-7rm"
                 name="listName"
                 id="listName"
                 required
