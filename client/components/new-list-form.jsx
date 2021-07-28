@@ -56,9 +56,7 @@ export default class NewListForm extends React.Component {
                 value={this.state.listName}
               />
               <div className="center-content space-between full-width">
-                <a href="My-Lists">
                 <button className="form-btn purple-fill click" onClick={this.handleCancel}>Cancel</button>
-                </a>
                 <input type="submit" className="form-btn blue-fill click" value="Save" />
               </div>
             </form>

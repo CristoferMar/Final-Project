@@ -31,12 +31,13 @@ CREATE TABLE "public"."lists" (
 
 
 CREATE TABLE "public"."dates" (
-	"itemId" serial NOT NULL,
+	"dateId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"listId" integer NOT NULL,
 	"dateIdea" TEXT NOT NULL,
 	"costAmount" integer NOT NULL,
-	CONSTRAINT "dates_pk" PRIMARY KEY ("itemId")
+  "isActive" BOOLEAN NOT NULL DEFAULT 'true',
+	CONSTRAINT "dates_pk" PRIMARY KEY ("dateId")
 ) WITH (
   OIDS=FALSE
 );
@@ -44,7 +45,7 @@ CREATE TABLE "public"."dates" (
 
 
 CREATE TABLE "public"."history" (
-	"itemId" integer NOT NULL,
+	"dateId" integer NOT NULL,
 	"userId" integer NOT NULL,
 	"addedAt" timestamp with time zone NOT NULL default now()
 ) WITH (
