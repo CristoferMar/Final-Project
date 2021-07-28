@@ -32,7 +32,6 @@ CREATE TABLE "public"."lists" (
 
 CREATE TABLE "public"."dates" (
 	"dateId" serial NOT NULL,
-	"userId" integer NOT NULL,
 	"listId" integer NOT NULL,
 	"dateIdea" TEXT NOT NULL,
 	"costAmount" integer NOT NULL,
@@ -57,7 +56,6 @@ CREATE TABLE "public"."history" (
 
 ALTER TABLE "lists" ADD CONSTRAINT "lists_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
-ALTER TABLE "dates" ADD CONSTRAINT "dates_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "dates" ADD CONSTRAINT "dates_fk1" FOREIGN KEY ("listId") REFERENCES "lists"("listId");
 
 ALTER TABLE "history" ADD CONSTRAINT "history_fk0" FOREIGN KEY ("itemId") REFERENCES "dates"("itemId");
