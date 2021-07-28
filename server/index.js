@@ -71,7 +71,6 @@ app.post('/api/dates', (req, res, next) => {
 
   db.query(sql, params)
     .then(result => {
-      // console.log(result.rows);
       if (result.rows.length === 0) {
         throw new ClientError(404, `Could not find a list with listId ${listId}`);
       }
