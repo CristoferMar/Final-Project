@@ -11,8 +11,8 @@ export default class UserLists extends React.Component {
 
   handleListClick(event) {
     // console.log('event.target:', event.target);
-    const listSelected = event.target.getAttribute('id');
-    // console.log('listSelected:', listSelected);
+    const selectedList = event.target.getAttribute('id');
+    // console.log('listSelected:', selectedList);
   }
 
   componentDidMount() {
