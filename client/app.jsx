@@ -3,6 +3,7 @@ import Navbar from './components/nav-bar';
 import UserLists from './components/user-lists';
 import parseRoute from './lib/parse-route';
 import NewListForm from './components/new-list-form';
+import NewDateForm from './components/new-date-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,13 +27,16 @@ export default class App extends React.Component {
     if (route.path === 'New-List') {
       return <NewListForm />;
     }
+    if (route.path === 'New-Date') {
+      return <NewDateForm />;
+    }
   }
 
   render() {
     const { path } = this.state.route;
     return (
       <>
-        {path !== 'New-List' &&
+        {(path !== 'New-List' && path !== 'New-Date') &&
           <Navbar path={path} />
         }
 
