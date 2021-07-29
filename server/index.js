@@ -46,12 +46,13 @@ app.post('/api/lists', (req, res, next) => {
 });
 
 app.post('/api/dates', (req, res, next) => {
-  const listId = parseInt(req.body.listId);
-  const { dateIdea, costAmount } = req.body;
+  let { listId, dateIdea, costAmount } = req.body;
+  listId = parseInt(req.body.listId);
+  costAmount = parseInt(costAmount);
   if (!Number.isInteger(listId) || listId < 0) {
     throw new ClientError(400, 'The listId must be a positive integer');
   }
-  if ((!dateIdea) || (!costAmount)) {
+  if ((!dateIdea) || !Number.isInteger(costAmount)) {
     throw new ClientError(400, 'The dateIdea and costAmount fields are required');
   }
 

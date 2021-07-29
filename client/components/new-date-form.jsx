@@ -7,9 +7,36 @@ export default class NewDateForm extends React.Component {
       dateIdea: '',
       costAmount: 0
     };
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  handleChange() {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+    // console.log(this.state.dateIdea);
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    // window.location.hash = 'My-Lists?listId';
+  }
+
+  handleSubmit() {
+    event.preventDefault();
+    const req = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        dateIdea: this.state.dateIdea,
+        costAmount: this.state.costAmount,
+        listId: 1 // this.props.listId in the next feature
+      })
+    };
+    fetch('/api/dates', req)
+      .then(res => res.json())
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -39,11 +66,12 @@ export default class NewDateForm extends React.Component {
                 name="costAmount"
                 id="costAmount"
                 required
-                onChange={this.handleChange}>
+                onChange={this.handleChange}
+                >
                   <option value="0">Free</option>
                   <option value="10">Less than $10</option>
                   <option value="20">Around $20</option>
-                  <option value="30">Around $40</option>
+                  <option value="40">Around $40</option>
                   <option value="60">Around $60</option>
                   <option value="80">Around $80</option>
                   <option value="120">Around $120</option>
