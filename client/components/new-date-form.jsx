@@ -20,7 +20,7 @@ export default class NewDateForm extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    // window.location.hash = 'My-Lists?listId';
+    // window.location.hash = 'My-Lists?listId'; for next feature
   }
 
   handleSubmit() {
