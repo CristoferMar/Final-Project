@@ -4,6 +4,7 @@ import UserLists from './components/user-lists';
 import parseRoute from './lib/parse-route';
 import NewListForm from './components/new-list-form';
 import NewDateForm from './components/new-date-form';
+import ListDetails from './components/list-details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,6 +30,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'New-Date') {
       return <NewDateForm />;
+    }
+    if (route.path === 'Lists') {
+      return <ListDetails listId={route.params.listId} />;
     }
   }
 

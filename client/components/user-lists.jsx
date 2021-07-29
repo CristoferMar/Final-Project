@@ -6,14 +6,15 @@ export default class UserLists extends React.Component {
     this.state = {
       userLists: []
     };
-    this.handleListClick = this.handleListClick.bind(this);
+    // this.handleListClick = this.handleListClick.bind(this);
   }
 
-  handleListClick(event) {
-    // console.log('event.target:', event.target);
-    const selectedList = event.target.getAttribute('id');
-    // console.log('listSelected:', selectedList);
-  }
+  // handleListClick(event) {
+  //   event.preventDefault();
+  // //   // console.log('event.target:', event.target);
+  // //   const selectedList = event.target.getAttribute('id');
+  // //   // console.log('listSelected:', selectedList);
+  // }
 
   componentDidMount() {
     const req = {
@@ -49,8 +50,10 @@ export default class UserLists extends React.Component {
           this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
-                <p onClick={this.handleListClick} id={listItem.listId} className="width-76-percent click">
-                  {listItem.listTitle}
+                <p id={listItem.listId} className="width-76-percent click">
+                  <a href={`#Lists?listId=${listItem.listId}`}>
+                    {listItem.listTitle}
+                  </a>
                 </p>
                 <div className="center-content align-center max-height-31">
                   <p className="font-light-responsive center-content align-center">
