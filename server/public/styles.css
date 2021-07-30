@@ -1,7 +1,7 @@
 .page {
   min-height: 100vh;
   background: rgb(12, 0, 83);
-  background: linear-gradient(180deg, rgba(12, 0, 83, 1) 10%, rgba(147, 32, 224, 1) 100%);
+  background: linear-gradient(180deg, rgba(12, 0, 83, 1) 15%, rgba(147, 32, 224, 1) 110%);
   display: flex;
   justify-content: center;
 }
@@ -51,6 +51,18 @@
   justify-content: space-between;
 }
 
+.float-left {
+  float: left;
+}
+
+.width-25 {
+  min-width: 25px;
+}
+
+.max-width-title {
+  max-width: 625px;
+}
+
 .text-box {
   width: 100%;
   padding: 5px;
@@ -60,6 +72,10 @@
 
 .margin-bottom-7rm {
   margin-bottom: 0.7rem;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
 }
 
 .width-70-precent {

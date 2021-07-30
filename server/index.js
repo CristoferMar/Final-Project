@@ -52,7 +52,7 @@ app.post('/api/dates', (req, res, next) => {
   if (!Number.isInteger(listId) || listId < 0) {
     throw new ClientError(400, 'The listId must be a positive integer');
   }
-  if ((!dateIdea) || !Number.isInteger(costAmount)) {
+  if (!dateIdea || !Number.isInteger(costAmount)) {
     throw new ClientError(400, 'The dateIdea and costAmount fields are required');
   }
 
@@ -91,6 +91,32 @@ app.get('/api/lists', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/dates/:listId', (req, res, next) => {
+  let { listId } = req.params;
+  listId = parseInt(listId);
+  if (!Number.isInteger(listId) || listId < 0) {
+    throw new ClientError(400, 'The listId must be a positive integer');
+  }
+  const sql = `
+  select "l"."listId", "l"."listTitle", json_agg("d" order by "d"."dateIdea") as "dateIdeas"
+    from "lists" as "l"
+    left join "dates" as "d" using ("listId")
+    where "l"."userId" = 1
+      and "l"."listId" = $1
+    group by "l"."listId"
+  `;
+
+  const params = [listId];
+  db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `Could not find a list with listId ${listId}`);
+      }
+      res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));
 });

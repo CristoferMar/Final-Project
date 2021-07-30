@@ -23,27 +23,31 @@ export default class UserLists extends React.Component {
 
   render() {
     return (
-        <div className="padding-10 width-responsive">
+      <div className="padding-10 width-responsive">
         <div className="flex full-width align-center space-between padding-vert-10n25">
-            <h3>Create A New List</h3>
-            <a href="#New-List" className="flex align-center">
-              <img className="height-25 click" src="images/add-list-btn.svg" alt="add new list" />
-            </a>
-          </div>
+          <h3>Create A New List</h3>
+          <a href="#New-List" className="flex align-center">
+            <img className="height-25 click" src="images/add-list-btn.svg" alt="add new list" />
+          </a>
+        </div>
 
-          {
-            this.state.userLists.length === 0 &&
-              <div className="content-center full-width padding-10">
-                  You have no lists at the moment.
-              </div>
-          }
-          {
-            this.state.userLists.length > 0 &&
-            this.state.userLists.map(listItem =>
+        {
+          !this.state.userLists.length &&
+          <div className="content-center full-width padding-10">
+            You have no lists at the moment.
+          </div>
+        }
+        {
+          this.state.userLists.length &&
+          this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
-                <p className="width-76-percent click">{listItem.listTitle}</p>
-                  <div className="center-content align-center max-height-31">
+                <p id={listItem.listId} className="width-76-percent click">
+                  <a href={`#Lists?listId=${listItem.listId}`}>
+                    {listItem.listTitle}
+                  </a>
+                </p>
+                <div className="center-content align-center max-height-31">
                   <p className="font-light-responsive center-content align-center">
                     {2500 + ' Items'}
                   </p>
@@ -51,10 +55,9 @@ export default class UserLists extends React.Component {
                 </div>
               </div>
             </div>
-            )
-          }
-
-        </div>
+          )
+        }
+      </div>
     );
   }
 }
