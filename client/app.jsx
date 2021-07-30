@@ -29,10 +29,10 @@ export default class App extends React.Component {
       return <NewListForm />;
     }
     if (route.path === 'New-Date') {
-      return <NewDateForm />;
+      return <NewDateForm listId={route.params.get('listId')} />;
     }
     if (route.path === 'Lists') {
-      return <ListDetails listId={route.params.listId} />;
+      return <ListDetails listId={route.params.get('listId')} />;
     }
   }
 

@@ -6,15 +6,7 @@ export default class UserLists extends React.Component {
     this.state = {
       userLists: []
     };
-    // this.handleListClick = this.handleListClick.bind(this);
   }
-
-  // handleListClick(event) {
-  //   event.preventDefault();
-  // //   // console.log('event.target:', event.target);
-  // //   const selectedList = event.target.getAttribute('id');
-  // //   // console.log('listSelected:', selectedList);
-  // }
 
   componentDidMount() {
     const req = {
@@ -40,13 +32,13 @@ export default class UserLists extends React.Component {
         </div>
 
         {
-          this.state.userLists.length === 0 &&
+          !this.state.userLists.length &&
           <div className="content-center full-width padding-10">
             You have no lists at the moment.
           </div>
         }
         {
-          this.state.userLists.length > 0 &&
+          this.state.userLists.length &&
           this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
@@ -65,7 +57,6 @@ export default class UserLists extends React.Component {
             </div>
           )
         }
-
       </div>
     );
   }

@@ -20,7 +20,7 @@ export default class NewDateForm extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    // window.location.hash = 'My-Lists?listId'; for next feature
+    window.location.hash = `Lists?listId=${this.props.listId}`;
   }
 
   handleSubmit() {
@@ -31,15 +31,19 @@ export default class NewDateForm extends React.Component {
       body: JSON.stringify({
         dateIdea: this.state.dateIdea,
         costAmount: this.state.costAmount,
-        listId: 1 // this.props.listId in the next feature
+        listId: this.props.listId
       })
     };
     fetch('/api/dates', req)
       .then(res => res.json())
+      .then(() => {
+        window.location.hash = `Lists?listId=${this.props.listId}`;
+      })
       .catch(err => console.error(err));
   }
 
   render() {
+
     return (
       <div className="full-width full-height center-content align-center">
         <div className="form-container">
