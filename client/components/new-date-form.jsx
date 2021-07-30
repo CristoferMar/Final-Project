@@ -15,7 +15,6 @@ export default class NewDateForm extends React.Component {
   handleChange() {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    // console.log(this.state.dateIdea);
   }
 
   handleCancel(event) {
