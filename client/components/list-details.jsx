@@ -36,7 +36,7 @@ export default class ListDetails extends React.Component {
           <>
             <div className="flex space-between full-width align-center padding-vert-10n25">
               <a href="#My-Lists" className="flex align-center float-left">
-                <img className="height-25 click" src="images/tri-colored-back-arrow.svg" alt="add new list" />
+                <img className="height-25 click" src="/images/tri-colored-back-arrow.svg" alt="add new list" />
               </a>
               <h3 className="center-content align-center">{listTitle}</h3>
               <div className="width-25"></div>
@@ -45,7 +45,7 @@ export default class ListDetails extends React.Component {
               <h4>
                 Add Date/Item?
               </h4>
-                <a href={`#New-Date?listId=${listId}`}><img className="height-25 click" src="images\add-date-btn.svg" alt="add date or item" /></a>
+                <a href={`#New-Date?listId=${listId}`}><img className="height-25 click" src="/images\add-date-btn.svg" alt="add date or item" /></a>
             </div>
           </>
         }
@@ -64,7 +64,7 @@ export default class ListDetails extends React.Component {
                     {dateInfo.dateIdea}
                   </p>
                   <div className="center-content align-center max-height-31">
-                    <img className="height-17" src="images/cost-icon.svg" alt="configure list" />
+                    <img className="height-17" src="/images/cost-icon.svg" alt="configure list" />
                     <p className="margin-left-5 font-light-responsive center-content align-center">
                       {dateInfo.costAmount}
                     </p>
@@ -78,7 +78,7 @@ export default class ListDetails extends React.Component {
             <>
               <div className="padding-vert-10n25" >This list ID is not available</div>
               <a href="#My-Lists" className="center-content align-center">
-                <img className="height-25 click" src="images/tri-colored-back-arrow.svg" alt="add new list" />
+                <img className="height-25 click" src="/images/tri-colored-back-arrow.svg" alt="add new list" />
                 <span className="margin-left-5">Return to My Lists?</span>
               </a>
             </>
