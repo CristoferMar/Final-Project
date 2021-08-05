@@ -1,7 +1,5 @@
 .page {
   min-height: 100vh;
-  background: rgb(12, 0, 83);
-  background: linear-gradient(180deg, rgba(12, 0, 83, 1) 0%, rgba(147, 32, 224, 1) 110%);
   display: flex;
   justify-content: center;
 }
@@ -188,4 +186,29 @@
 
 .margin-left-5 {
   margin-left: 5px;
+}
+
+.absolute {
+  position: absolute;
+  background: #0c0053;
+  padding: 10px 20px;
+  padding-top: 0;
+  width: 170px;
+  right: 0;
+  top: 54px;
+  text-align: right;
+  border-radius: 0 0 0 20px;
+  font-weight: 600;
+}
+
+.drawer-close {
+  display: none;
+}
+
+.nav-btn:hover {
+  color: #3198fc;
+}
+
+.border-white {
+  border: solid white 1px;
 }

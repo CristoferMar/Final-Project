@@ -5,6 +5,7 @@ import parseRoute from './lib/parse-route';
 import NewListForm from './components/new-list-form';
 import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
+import GenerateDate from './components/generate-date';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,17 +35,24 @@ export default class App extends React.Component {
     if (route.path === 'Lists') {
       return <ListDetails listId={route.params.get('listId')} />;
     }
+    if (route.path === 'Generate-Date') {
+      return <GenerateDate />;
+    }
   }
 
   render() {
     const { path } = this.state.route;
+    const nonNav = ['New-List', 'New-Date'];
+    const nav = nonNav.includes(path);
+    let hasNav = 'with-navbar';
+    nav ? hasNav = '' : hasNav = 'with-navbar';
     return (
       <>
-        {(path !== 'New-List' && path !== 'New-Date') &&
+        {!nav &&
           <Navbar path={path} />
         }
 
-        <div className="page with-navbar">
+        <div className={`page ${hasNav}`}>
           {this.renderPage(this.state.route)}
         </div>
       </>
