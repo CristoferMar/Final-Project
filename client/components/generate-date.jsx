@@ -4,16 +4,41 @@ export default class GenerateDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentList: null,
-      priceList: 'Free'
+      listsHaveLoaded: false,
+      userLists: [],
+      listChoise: '',
+      costAmount: 'Free'
     };
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleCancel = this.handleCancel.bind(this);
   }
 
-  handleChange() {
+  componentDidMount() {
+    const req = {
+      method: 'GET',
+      header: { 'Content-Type': 'application/json' }
+    };
+    fetch('/api/lists', req)
+      .then(res => res.json())
+      .then(userLists => {
+        this.setState({ userLists, listsHaveLoaded: true });
+      })
+      .catch(err => console.error(err));
+  }
 
+  handleSubmit() {
+    event.preventDefault();
+    console.log('form has been submitted');
+    console.log('this.state:', this.state);
+    console.log('this.props:', this.props);
+
+  }
+
+  handleChange() {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+    // this.setState()
   }
 
   render() {
@@ -22,17 +47,16 @@ export default class GenerateDate extends React.Component {
 
         <div className="form-container border-white">
           <form className="margin-auto" action="" onSubmit={this.handleSubmit}>
-            <label htmlFor="listName">Name of New List</label>
-            <input
-              autoFocus
-              type="text"
-              className="text-box margin-bottom-7rm"
-              name="listName"
-              id="listName"
-              required
-              onChange={this.handleChange}
-              value={'this.state.listName'}
-            />
+            <label htmlFor="listChoices">Which list are we using?</label>
+
+            <select name="listChoise" id="listChoise"
+            className="text-box margin-bottom-7rm"
+              onChange={this.handleChange}>
+              { (!this.state.userLists.length && this.state.listsHaveLoaded) &&
+                <option value="none">It seems you don&rsquo;t have any lists</option>
+
+              }
+            </select>
 
             <div className="flex align-center space-between margin-bottom-7rm">
               <label htmlFor="costAmount">Price</label>
@@ -59,7 +83,8 @@ export default class GenerateDate extends React.Component {
 
             <div className="center-content space-between full-width">
               <button className="form-btn purple-fill click" onClick={this.handleCancel}>Cancel</button>
-              <input type="submit" className="form-btn blue-fill click" value="Save" />
+              {/* <input type="submit" className="form-btn blue-fill click" value="Save" /> */}
+              <button className="form-btn blue-fill click">Save</button>
             </div>
           </form>
         </div>
