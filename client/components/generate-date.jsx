@@ -6,7 +6,7 @@ export default class GenerateDate extends React.Component {
     this.state = {
       listsHaveLoaded: false,
       userLists: [],
-      listChoise: '',
+      listChoiseId: '',
       costAmount: 'Free'
     };
     this.handleChange = this.handleChange.bind(this);
@@ -22,7 +22,11 @@ export default class GenerateDate extends React.Component {
     fetch('/api/lists', req)
       .then(res => res.json())
       .then(userLists => {
-        this.setState({ userLists, listsHaveLoaded: true });
+        this.setState({
+          userLists,
+          listsHaveLoaded: true,
+          listChoiseId: userLists[0].listId.toString()
+        });
       })
       .catch(err => console.error(err));
   }
@@ -31,38 +35,43 @@ export default class GenerateDate extends React.Component {
     event.preventDefault();
     console.log('form has been submitted');
     console.log('this.state:', this.state);
-    console.log('this.props:', this.props);
-
   }
 
   handleChange() {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    // this.setState()
   }
 
   render() {
     return (
-      <div className="full-width full-height center-content align-center">
+      <div className="full-width full-height-nim-nav center-content align-center">
+        <form className="height-100-percent" onSubmit={this.handleSubmit}>
+
+          <div className="flex align-center height-XX-percent">
 
         <div className="form-container border-white">
-          <form className="margin-auto" action="" onSubmit={this.handleSubmit}>
             <label htmlFor="listChoices">Which list are we using?</label>
 
-            <select name="listChoise" id="listChoise"
+            <select name="listChoiseId" id="listChoiseId"
             className="text-box margin-bottom-7rm"
               onChange={this.handleChange}>
               { (!this.state.userLists.length && this.state.listsHaveLoaded) &&
-                <option value="none">It seems you don&rsquo;t have any lists</option>
-
+                <option value="nullList">It seems you don&rsquo;t have any lists</option>
+              }
+              {this.state.userLists.length &&
+                this.state.userLists.map(listItem =>
+                  <option key={listItem.listId} value={listItem.listId}>
+                    {listItem.listTitle}
+                  </option>
+                )
               }
             </select>
 
-            <div className="flex align-center space-between margin-bottom-7rm">
-              <label htmlFor="costAmount">Price</label>
+            <div className="flex align-center space-between">
+              <label htmlFor="costAmount">Cost Estimate</label>
               <select
                 type="select"
-                className="text-box width-70-precent"
+                className="text-box width-55-percent"
                 name="costAmount"
                 id="costAmount"
                 required
@@ -80,15 +89,17 @@ export default class GenerateDate extends React.Component {
                 <option value="400">The High Life</option>
               </select>
             </div>
-
-            <div className="center-content space-between full-width">
-              <button className="form-btn purple-fill click" onClick={this.handleCancel}>Cancel</button>
-              {/* <input type="submit" className="form-btn blue-fill click" value="Save" /> */}
-              <button className="form-btn blue-fill click">Save</button>
-            </div>
-          </form>
         </div>
 
+        </div>
+
+        {/* <div className="divide"></div> */}
+
+        <div className="full-width">
+            <button className="height-70 purple-fill click generate-btn">Generate Date</button>
+        </div>
+
+      </form>
       </div>
     );
   }
