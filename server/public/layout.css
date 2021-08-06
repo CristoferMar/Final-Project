@@ -6,10 +6,20 @@
   font-size: 0.6rem;
 }
 
+.generate-btn {
+  width: 100%;
+  left: 0;
+}
+
 @media screen and (min-width: 625px) {
   .width-responsive {
     max-width: 675px;
     font-size: 1.4rem;
+  }
+
+  .generate-btn {
+    width: 345px;
+    left: auto;
   }
 
   .font-light-responsive {

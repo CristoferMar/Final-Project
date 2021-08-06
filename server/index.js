@@ -42,7 +42,6 @@ app.post('/api/lists', (req, res, next) => {
       res.status(201).json(message);
     })
     .catch(err => next(err));
-
 });
 
 app.post('/api/dates', (req, res, next) => {
@@ -117,6 +116,29 @@ app.get('/api/dates/:listId', (req, res, next) => {
         throw new ClientError(404, `Could not find a list with listId ${listId}`);
       }
       res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/random', (req, res, next) => {
+  let { listId, costAmount } = req.query;
+  listId = parseInt(listId);
+  costAmount = parseInt(costAmount);
+  if (!Number.isInteger(listId) || !Number.isInteger(costAmount)) {
+    throw new ClientError(400, 'Both listId and costAmount need to exist in the request, as positive integers');
+  }
+  const sql = `
+    select * from "dates"
+    where "listId" = $1
+    and "costAmount" = $2
+    and "isActive" = true
+    order by Random()
+    limit 1;
+  `;
+  const params = [listId, costAmount];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });

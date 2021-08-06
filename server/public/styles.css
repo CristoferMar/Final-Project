@@ -23,13 +23,13 @@
   padding: 20px 50px;
 }
 
+.margin-auto {
+  margin: auto;
+}
+
 .form-title {
   text-align: center;
   margin-bottom: 0.7rem;
-}
-
-.margin-auto {
-  margin: auto;
 }
 
 .center-content {
@@ -121,8 +121,16 @@
   cursor: pointer;
 }
 
+.click-up {
+  cursor: pointer;
+}
+
 .click:active {
   transform: translateY(2px);
+}
+
+.click-up:active {
+  transform: translateY(-2px);
 }
 
 .nav-bar {
@@ -159,6 +167,15 @@
   height: 17px;
 }
 
+.height-70 {
+  height: 70px;
+}
+
+.height-XX-percent {
+  height: calc(100% - 70px);
+  min-height: 140px;
+}
+
 .padding-10 {
   padding: 10px;
 }
@@ -178,6 +195,10 @@
 
 .width-76-percent {
   max-width: 76%;
+}
+
+.width-55-percent {
+  max-width: 55%;
 }
 
 .max-height-31 {
@@ -211,4 +232,23 @@
 
 .border-white {
   border: solid white 1px;
+}
+
+.generate-btn {
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.generate-btn:hover {
+  border: solid #0c0053 2px;
+  border-radius: 4px;
+}
+
+.height-100-percent {
+  height: 100%;
+}
+
+.full-height-nim-nav {
+  height: calc(100vh - 55px);
 }
