@@ -32,7 +32,7 @@ export default class App extends React.Component {
     if (route.path === 'New-Date') {
       return <NewDateForm listId={route.params.get('listId')} />;
     }
-    if (route.path === 'Lists') {
+    if (route.path === 'Read-List') {
       return <ListDetails listId={route.params.get('listId')} />;
     }
     if (route.path === 'Generate-Date') {

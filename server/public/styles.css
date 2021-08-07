@@ -37,10 +37,6 @@
   justify-content: center;
 }
 
-.full-width {
-  width: 100%;
-}
-
 .full-height {
   height: 100vh;
 }
@@ -91,6 +87,10 @@
   font-size: 1rem;
   padding: 3px 5px;
   width: 105px;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .purple-fill {
@@ -238,6 +238,7 @@
   border: none;
   color: white;
   font-size: 1.25rem;
+  width: 345px;
 }
 
 .generate-btn:hover {
@@ -251,4 +252,13 @@
 
 .full-height-nim-nav {
   height: calc(100vh - 55px);
+}
+
+.fixed {
+  position: fixed;
+  bottom: 0;
+}
+
+.height-500 {
+  max-height: 500px;
 }
