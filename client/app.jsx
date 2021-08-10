@@ -42,16 +42,15 @@ export default class App extends React.Component {
 
   render() {
     const { path } = this.state.route;
-    const withNav = ['New-List', 'New-Date'].includes(path);
-    let hasNav = 'with-navbar';
-    withNav ? hasNav = '' : hasNav = 'with-navbar';
+    const withNav = !['New-List', 'New-Date'].includes(path);
+    const pageClass = withNav ? 'page with-navbar' : 'page';
     return (
       <>
-        {!withNav &&
+        {withNav &&
           <Navbar path={path} />
         }
 
-        <div className={`page ${hasNav}`}>
+        <div className={pageClass}>
           {this.renderPage(this.state.route)}
         </div>
       </>
