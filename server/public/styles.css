@@ -1,7 +1,5 @@
 .page {
   min-height: 100vh;
-  background: rgb(12, 0, 83);
-  background: linear-gradient(180deg, rgba(12, 0, 83, 1) 0%, rgba(147, 32, 224, 1) 110%);
   display: flex;
   justify-content: center;
 }
@@ -25,22 +23,18 @@
   padding: 20px 50px;
 }
 
+.margin-auto {
+  margin: auto;
+}
+
 .form-title {
   text-align: center;
   margin-bottom: 0.7rem;
 }
 
-.margin-auto {
-  margin: auto;
-}
-
 .center-content {
   display: flex;
   justify-content: center;
-}
-
-.full-width {
-  width: 100%;
 }
 
 .full-height {
@@ -95,6 +89,10 @@
   width: 105px;
 }
 
+.full-width {
+  width: 100%;
+}
+
 .purple-fill {
   background: #9320e0;
 }
@@ -123,8 +121,16 @@
   cursor: pointer;
 }
 
+.click-up {
+  cursor: pointer;
+}
+
 .click:active {
   transform: translateY(2px);
+}
+
+.click-up:active {
+  transform: translateY(-2px);
 }
 
 .nav-bar {
@@ -161,6 +167,15 @@
   height: 17px;
 }
 
+.height-70 {
+  height: 70px;
+}
+
+.height-XX-percent {
+  height: calc(100% - 70px);
+  min-height: 140px;
+}
+
 .padding-10 {
   padding: 10px;
 }
@@ -182,10 +197,68 @@
   max-width: 76%;
 }
 
+.width-55-percent {
+  max-width: 55%;
+}
+
 .max-height-31 {
   max-height: 31px;
 }
 
 .margin-left-5 {
   margin-left: 5px;
+}
+
+.absolute {
+  position: absolute;
+  background: #0c0053;
+  padding: 10px 20px;
+  padding-top: 0;
+  width: 170px;
+  right: 0;
+  top: 54px;
+  text-align: right;
+  border-radius: 0 0 0 20px;
+  font-weight: 600;
+}
+
+.drawer-close {
+  display: none;
+}
+
+.nav-btn:hover {
+  color: #3198fc;
+}
+
+.border-white {
+  border: solid white 1px;
+}
+
+.generate-btn {
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  width: 345px;
+}
+
+.generate-btn:hover {
+  border: solid #0c0053 2px;
+  border-radius: 4px;
+}
+
+.height-100-percent {
+  height: 100%;
+}
+
+.full-height-nim-nav {
+  height: calc(100vh - 55px);
+}
+
+.fixed {
+  position: fixed;
+  bottom: 0;
+}
+
+.height-500 {
+  max-height: 500px;
 }

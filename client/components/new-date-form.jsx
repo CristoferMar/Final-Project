@@ -19,7 +19,7 @@ export default class NewDateForm extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    window.location.hash = `Lists?listId=${this.props.listId}`;
+    window.location.hash = `Read-List?listId=${this.props.listId}`;
   }
 
   handleSubmit() {
@@ -36,7 +36,7 @@ export default class NewDateForm extends React.Component {
     fetch('/api/dates', req)
       .then(res => res.json())
       .then(() => {
-        window.location.hash = `Lists?listId=${this.props.listId}`;
+        window.location.hash = `Read-List?listId=${this.props.listId}`;
       })
       .catch(err => console.error(err));
   }

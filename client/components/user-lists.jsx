@@ -4,6 +4,7 @@ export default class UserLists extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      listsHaveLoaded: false,
       userLists: []
     };
   }
@@ -16,7 +17,7 @@ export default class UserLists extends React.Component {
     fetch('/api/lists', req)
       .then(res => res.json())
       .then(userLists => {
-        this.setState({ userLists });
+        this.setState({ userLists, listsHaveLoaded: true });
       })
       .catch(err => console.error(err));
   }
@@ -32,7 +33,7 @@ export default class UserLists extends React.Component {
         </div>
 
         {
-          !this.state.userLists.length &&
+          (!this.state.userLists.length && this.state.listsHaveLoaded) &&
           <div className="content-center full-width padding-10">
             You have no lists at the moment.
           </div>
@@ -43,7 +44,7 @@ export default class UserLists extends React.Component {
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
                 <p id={listItem.listId} className="width-76-percent click">
-                  <a href={`#Lists?listId=${listItem.listId}`}>
+                  <a href={`#Read-List?listId=${listItem.listId}`}>
                     {listItem.listTitle}
                   </a>
                 </p>
