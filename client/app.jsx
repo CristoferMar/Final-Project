@@ -42,13 +42,12 @@ export default class App extends React.Component {
 
   render() {
     const { path } = this.state.route;
-    const nonNav = ['New-List', 'New-Date'];
-    const nav = nonNav.includes(path);
+    const withNav = ['New-List', 'New-Date'].includes(path);
     let hasNav = 'with-navbar';
-    nav ? hasNav = '' : hasNav = 'with-navbar';
+    withNav ? hasNav = '' : hasNav = 'with-navbar';
     return (
       <>
-        {!nav &&
+        {!withNav &&
           <Navbar path={path} />
         }
 

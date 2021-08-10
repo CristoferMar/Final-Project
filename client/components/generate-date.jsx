@@ -83,7 +83,6 @@ export default class GenerateDate extends React.Component {
               <div className="flex align-center space-between">
                 <label htmlFor="costAmount">Cost Estimate</label>
                 <select
-                  type="select"
                   className="text-box width-55-percent"
                   name="costAmount"
                   id="costAmount"
@@ -126,10 +125,9 @@ export default class GenerateDate extends React.Component {
 
       {(this.state.randomHasLoaded && !this.state.randomDate.length) &&
         <div className="form-container">
-            <h3 className="form-title">This list seems to be empty or no items have that cost</h3>
-          {/* <h3 className="form-title">Or none have that cost</h3> */}
+          <h3 className="form-title">This list seems to be empty or no items have that cost</h3>
           <p className="form-title">You can add dates/items to this list in your <a href={`#Read-List?listId=${this.state.listChoiseId}`} className="blue">Read-Lists</a> page.</p>
-          <div >
+          <div>
             <button className="form-btn purple-fill full-width click" onClick={this.handleReturn}>Go back to Generator?</button>
           </div>
         </div>

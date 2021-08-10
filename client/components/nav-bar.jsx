@@ -11,10 +11,9 @@ export default class Navbar extends React.Component {
   }
 
   handleDrawer(event) {
-    let drawerStatus = '';
-    this.state.drawerOpened === 'drawer-open'
-      ? drawerStatus = 'drawer-close'
-      : drawerStatus = 'drawer-open';
+    const drawerStatus = this.state.drawerOpened === 'drawer-open'
+      ? 'drawer-close'
+      : 'drawer-open';
     this.setState({ drawerOpened: drawerStatus });
   }
 
@@ -40,8 +39,6 @@ export default class Navbar extends React.Component {
         <div className={'absolute ' + this.state.drawerOpened}>
           <p className="click nav-btn" onClick={this.handleClick}>Generate Date</p>
           <p className="click nav-btn padding-top-5" onClick={this.handleClick}>My Lists</p>
-          {/* <p className="click nav-btn padding-top-5">My History</p>
-          <p className="click nav-btn padding-top-5">Discover Lists</p> */}
           <hr className="solid" />
           <p className="red click ">Sign Out</p>
         </div>
