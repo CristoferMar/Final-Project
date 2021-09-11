@@ -39,6 +39,7 @@ export default class Navbar extends React.Component {
         <div className={'absolute ' + this.state.drawerOpened}>
           <p className="click nav-btn" onClick={this.handleClick}>Generate Date</p>
           <p className="click nav-btn padding-top-5" onClick={this.handleClick}>My Lists</p>
+          <p className="click nav-btn padding-top-5" onClick={this.handleClick}>My History</p>
           <hr className="solid" />
           <p className="red click ">Sign Out</p>
         </div>

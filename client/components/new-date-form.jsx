@@ -86,7 +86,7 @@ export default class NewDateForm extends React.Component {
 
             <div className="center-content space-between full-width">
               <button className="form-btn purple-fill click" onClick={this.handleCancel}>Cancel</button>
-              <input type="submit" className="form-btn blue-fill click" value="Save" />
+              <button className="form-btn blue-fill click">Save</button>
             </div>
           </form>
         </div>
