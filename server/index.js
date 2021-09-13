@@ -162,6 +162,22 @@ app.post('/api/history', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/history', (req, res, next) => {
+  const sql = `
+    select "dates"."dateIdea", "dates"."dateId", "history"."addedAt"
+    from "dates"
+    join "history" using("dateId")
+    where "history"."userId" = 1
+    order by "addedAt" desc
+  `;
+  const params = [];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
