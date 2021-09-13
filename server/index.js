@@ -143,6 +143,25 @@ app.get('/api/random', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/history', (req, res, next) => {
+  let { userId, dateId } = req.body;
+  userId = parseInt(userId);
+  dateId = parseInt(dateId);
+  if (!Number.isInteger(dateId) || !Number.isInteger(userId)) {
+    throw new ClientError(400, 'Both userId and dateId need to be positive integers.');
+  }
+  const sql = `
+    insert into "history" ("dateId", "userId")
+    values ($1, $2)
+  `;
+  const params = [dateId, userId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json('Okay, this worked');
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
