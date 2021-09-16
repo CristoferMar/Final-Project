@@ -34,6 +34,17 @@ export default class GenerateDate extends React.Component {
   }
 
   handleReturn() {
+    event.preventDefault();
+    const req = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: 1,
+        dateId: this.state.randomDate[0].dateId
+      })
+    };
+    fetch('/api/history', req)
+      .catch(err => console.error(err));
     this.setState({ randomHasLoaded: false });
   }
 

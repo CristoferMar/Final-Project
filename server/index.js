@@ -152,28 +152,31 @@ app.post('/api/history', (req, res, next) => {
   }
   const sql = `
     insert into "history" ("dateId", "userId")
-    values ($1, $2)
+    values ($1, 1)
+    returning "dateId", "addedAt"
   `;
-  const params = [dateId, userId];
+  const params = [dateId];
   db.query(sql, params)
     .then(result => {
-      res.status(200).json('Okay, this worked');
+      res.status(201).json(result.rows[0]);
     })
     .catch(err => next(err));
 });
 
 app.get('/api/history', (req, res, next) => {
   const sql = `
-    select "dates"."dateIdea", "dates"."dateId", "history"."addedAt"
+    select "dates"."dateIdea", "lists"."listTitle", "dates"."dateId", "history"."addedAt"
     from "dates"
     join "history" using("dateId")
+    join "lists" using("listId")
     where "history"."userId" = 1
     order by "addedAt" desc
   `;
-  const params = [];
-  db.query(sql, params)
+  // const params = [];
+  // , params
+  db.query(sql)
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });
@@ -184,3 +187,6 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
 });
+
+// .env db URL should read the following, when it's pushed live:
+// DATABASE_URL=postgres://uyxsnztfvdnpam:f08c4af64e29d655b22f265638d7317965a6bb62b773846dc9198d7ebf49dce9@ec2-35-174-56-18.compute-1.amazonaws.com:5432/d27uu2jroi6rdi
