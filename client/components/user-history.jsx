@@ -25,7 +25,7 @@ export default class UserHistory extends React.Component {
   render() {
     return (
       <>
-        <div>Is this rendering?</div>
+        <div className="padding-10 width-responsive">My History</div>
       </>
     );
   }
