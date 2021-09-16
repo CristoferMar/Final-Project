@@ -172,8 +172,6 @@ app.get('/api/history', (req, res, next) => {
     where "history"."userId" = 1
     order by "addedAt" desc
   `;
-  // const params = [];
-  // , params
   db.query(sql)
     .then(result => {
       res.status(200).json(result.rows);
