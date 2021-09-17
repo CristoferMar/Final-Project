@@ -28,9 +28,8 @@
 /*
 when something is loading, add the following elements
 
-<>
-  <div className="full-width center-content">
+<div className="full-width center-content">
     <div className="lds-dual-ring"></div>
-  </div>
-</>
- */
+</div>
+
+*/
