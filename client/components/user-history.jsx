@@ -49,7 +49,7 @@ export default class UserHistory extends React.Component {
                     : <>
                         {this.state.history.map(item =>
                           <div className="full-width flex space-between" key={item.addedAt}>
-                            <div className="margin-bottom-10">
+                            <div className="margin-bottom-10 font-1rm">
                               <p><i>{item.dateIdea}</i></p>
                               <p>from <i>{item.listTitle}</i></p>
                             </div>
