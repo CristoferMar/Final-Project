@@ -185,6 +185,3 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
 });
-
-// .env db URL should read the following, when it's pushed live:
-// DATABASE_URL=postgres://uyxsnztfvdnpam:f08c4af64e29d655b22f265638d7317965a6bb62b773846dc9198d7ebf49dce9@ec2-35-174-56-18.compute-1.amazonaws.com:5432/d27uu2jroi6rdi
