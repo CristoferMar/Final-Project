@@ -6,6 +6,7 @@ import NewListForm from './components/new-list-form';
 import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
 import GenerateDate from './components/generate-date';
+import UserHistory from './components/user-history';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,6 +38,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'Generate-Date') {
       return <GenerateDate />;
+    }
+    if (route.path === 'My-History') {
+      return <UserHistory />;
     }
   }
 

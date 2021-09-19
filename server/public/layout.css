@@ -6,6 +6,14 @@
   font-size: 0.6rem;
 }
 
+.elapsedTime {
+  max-width: 25%;
+}
+
+.font-1rm-res {
+  font-size: 0.85rem;
+}
+
 @media screen and (min-width: 625px) {
   .width-responsive {
     max-width: 675px;
@@ -14,5 +22,9 @@
 
   .font-light-responsive {
     font-size: 0.84rem;
+  }
+
+  .font-1rm-res {
+    font-size: 1rem;
   }
 }

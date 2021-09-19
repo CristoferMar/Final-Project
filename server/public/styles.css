@@ -262,3 +262,11 @@
 .height-500 {
   max-height: 500px;
 }
+
+.text-right {
+  text-align: right;
+}
+
+.font-small {
+  font-size: 0.8rem;
+}
