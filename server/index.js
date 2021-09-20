@@ -179,6 +179,24 @@ app.get('/api/history', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.patch('/api/dateActive/:dateId', (req, res, next) => {
+  let { dateId } = req.params;
+  dateId = parseInt(dateId);
+  if (!Number.isInteger(dateId)) {
+    throw new ClientError(400, 'The userId must be a positive integer.');
+  }
+  const sql = `
+  UPDATE "dates" SET "isActive" = NOT "isActive"
+  WHERE "dateId" = $1
+  `;
+  const params = [dateId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(204).json(result);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
