@@ -7,20 +7,27 @@ export default function ListItem(props) {
   // toggleActive(!isActive);
   let imgURL = '../../server/images/checked-box.svg';
   let imgAlt = 'checked';
-  let itemClasses = 'width-76-percent click';
+  let strikeClass = '';
 
   // image pathways are not working
   if (isActive) {
-    imgURL = 'server/public/images/checked-box.svg';
+    imgURL = '/images/checked-box.svg';
     imgAlt = 'checked';
-    itemClasses = 'width-76-percent click';
   } else {
-    imgURL = 'server/public/images/unchecked-box.svg';
+    imgURL = '/images/unchecked-box.svg';
     imgAlt = 'unchecked';
-    itemClasses = 'width-76-percent click strike';
+    strikeClass = ' strike';
   }
 
   const setIsActive = () => {
+    const req = {
+      method: 'patch',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch(`api/dateActive/${props.dateInfo.dateId}`, req)
+      .then(res => res.json())
+      .then(item => console.log('fetch request done:', item)
+      );
     toggleActive(!isActive);
     props.dateInfo.isActive = !props.dateInfo.isActive;
     // console.log('props.dateInfo from callback:', props.dateInfo);
@@ -29,11 +36,9 @@ export default function ListItem(props) {
   return (
       <div className="flex full-width space-between">
 
-        <div className="flex" onClick={() => setIsActive()}>
-          <img src={imgURL} alt={imgAlt} />
-          <p className={itemClasses} >
-            {props.dateInfo.dateIdea}
-          </p>
+      <div className="flex width-76-percent click" onClick={() => setIsActive()}>
+        <img className="margin-right-10" src={imgURL} alt={imgAlt} />
+        <p className={`full-width${strikeClass}`} >{props.dateInfo.dateIdea}</p>
         </div>
 
         <div className="center-content align-center max-height-31">

@@ -209,6 +209,10 @@
   margin-left: 5px;
 }
 
+.margin-right-10 {
+  margin-right: 10px;
+}
+
 .absolute {
   position: absolute;
   background: #0c0053;

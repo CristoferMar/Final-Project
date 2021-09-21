@@ -192,6 +192,7 @@ app.patch('/api/dateActive/:dateId', (req, res, next) => {
   const params = [dateId];
   db.query(sql, params)
     .then(result => {
+      console.log(result);
       res.status(204).json(result);
     })
     .catch(err => next(err));
