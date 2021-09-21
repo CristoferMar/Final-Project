@@ -3,13 +3,9 @@ import React, { useState } from 'react';
 export default function ListItem(props) {
 
   const [isActive, toggleActive] = useState(props.dateInfo.isActive);
-  // console.log('isActive:', isActive);
-  // toggleActive(!isActive);
   let imgURL = '../../server/images/checked-box.svg';
   let imgAlt = 'checked';
   let strikeClass = '';
-
-  // image pathways are not working
   if (isActive) {
     imgURL = '/images/checked-box.svg';
     imgAlt = 'checked';
@@ -21,16 +17,12 @@ export default function ListItem(props) {
 
   const setIsActive = () => {
     const req = {
-      method: 'patch',
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' }
     };
-    fetch(`api/dateActive/${props.dateInfo.dateId}`, req)
-      .then(res => res.json())
-      .then(item => console.log('fetch request done:', item)
-      );
-    toggleActive(!isActive);
-    props.dateInfo.isActive = !props.dateInfo.isActive;
-    // console.log('props.dateInfo from callback:', props.dateInfo);
+    fetch(`/api/dateActive/${props.dateInfo.dateId}`, req)
+      .then(toggleActive(!isActive))
+      .catch(err => console.error(err));
   };
 
   return (
