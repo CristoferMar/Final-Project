@@ -250,6 +250,10 @@
   height: 100%;
 }
 
+.strike {
+  text-decoration: line-through;
+}
+
 .full-height-nim-nav {
   height: calc(100vh - 55px);
 }
