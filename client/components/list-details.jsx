@@ -1,4 +1,5 @@
 import React from 'react';
+import ListItem from './list-item';
 
 export default class ListDetails extends React.Component {
   constructor(props) {
@@ -57,19 +58,9 @@ export default class ListDetails extends React.Component {
         }
         {
           dateIdeas && dateIdeas[0] &&
-            dateIdeas.map(dateInfo =>
-              <div key={dateInfo.dateId} className="padding-top-5">
-                <div className="flex full-width space-between">
-                  <p className="width-76-percent click">
-                    {dateInfo.dateIdea}
-                  </p>
-                  <div className="center-content align-center max-height-31">
-                    <img className="height-17" src="/images/cost-icon.svg" alt="configure list" />
-                    <p className="margin-left-5 font-light-responsive center-content align-center">
-                      {dateInfo.costAmount}
-                    </p>
-                  </div>
-                </div>
+            dateIdeas.map(item =>
+              <div key={item.dateId} id={item.dateId} className="padding-top-5">
+                <ListItem dateInfo={item} />
               </div>
             )
         }
