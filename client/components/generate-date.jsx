@@ -14,6 +14,7 @@ export default class GenerateDate extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReturn = this.handleReturn.bind(this);
+    this.saveHistory = this.saveHistory.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,10 @@ export default class GenerateDate extends React.Component {
   }
 
   handleReturn() {
+    this.setState({ randomHasLoaded: false });
+  }
+
+  saveHistory() {
     event.preventDefault();
     const req = {
       method: 'POST',
@@ -45,7 +50,7 @@ export default class GenerateDate extends React.Component {
     };
     fetch('/api/history', req)
       .catch(err => console.error(err));
-    this.setState({ randomHasLoaded: false });
+    this.handleReturn();
   }
 
   handleSubmit() {
@@ -128,7 +133,7 @@ export default class GenerateDate extends React.Component {
             <h2 className="margin-auto form-title">{this.state.randomDate[0].dateIdea}</h2>
             <div className="center-content space-between full-width">
               <button className="form-btn purple-fill click">Draw Again</button>
-              <button className="form-btn blue-fill click" onClick={this.handleReturn}>Let&rsquo;s Do This</button>
+              <button className="form-btn blue-fill click" onClick={this.saveHistory}>Let&rsquo;s Do This</button>
             </div>
           </form>
         </div>
@@ -136,8 +141,9 @@ export default class GenerateDate extends React.Component {
 
       {(this.state.randomHasLoaded && !this.state.randomDate.length) &&
         <div className="form-container">
-          <h3 className="form-title">This list seems to be empty or no items have that cost</h3>
-          <p className="form-title">You can add dates/items to this list in your <a href={`#Read-List?listId=${this.state.listChoiseId}`} className="blue">Read-Lists</a> page.</p>
+          <h3 className="form-title">No Results</h3>
+            <p className="form-title">This list may be empty or no checked items have that cost.</p>
+          <p className="form-title">You can add or review the dates/items to this list in your <a href={`#Read-List?listId=${this.state.listChoiseId}`} className="blue">Read-Lists</a> page.</p>
           <div>
             <button className="form-btn purple-fill full-width click" onClick={this.handleReturn}>Go back to Generator?</button>
           </div>
