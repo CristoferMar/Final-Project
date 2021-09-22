@@ -129,7 +129,11 @@ export default class GenerateDate extends React.Component {
       {(this.state.randomHasLoaded && this.state.randomDate.length > 0) &&
         <div className="form-container">
           <form className="margin-auto" action="" onSubmit={this.handleSubmit}>
-            <h3 className="form-title">Drawing Result:</h3>
+              <div className="flex space-between">
+              <img className="height-25 click" src="/images/tri-colored-back-arrow.svg" alt="add new list" onClick={this.handleReturn}></img>
+              <h3 className="form-title">Drawing Result:</h3>
+              <div className="width-25"></div>
+            </div>
             <h2 className="margin-auto form-title">{this.state.randomDate[0].dateIdea}</h2>
             <div className="center-content space-between full-width">
               <button className="form-btn purple-fill click">Draw Again</button>
