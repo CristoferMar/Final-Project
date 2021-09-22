@@ -21,7 +21,7 @@ export default function ListItem(props) {
       headers: { 'Content-Type': 'application/json' }
     };
     fetch(`/api/dateActive/${props.dateInfo.dateId}`, req)
-      .then(toggleActive(!isActive))
+      .then(() => toggleActive(!isActive))
       .catch(err => console.error(err));
   };
 
