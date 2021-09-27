@@ -7,7 +7,7 @@ import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
 import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
-import LandingPage from './components/landing-page';
+import LogIn from './components/landing-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,8 +25,8 @@ export default class App extends React.Component {
 
   renderPage() {
     const route = this.state.route;
-    if (route.path === 'Langing-Page' || route.path === '') {
-      return <LandingPage />;
+    if (route.path === 'Log-In' || route.path === '') {
+      return <LogIn />;
     }
     if (route.path === 'My-Lists') {
       return <UserLists />;

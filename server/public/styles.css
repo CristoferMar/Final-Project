@@ -12,6 +12,10 @@
   display: flex;
 }
 
+.column {
+  flex-direction: column;
+}
+
 .align-center {
   align-items: center;
 }
@@ -25,6 +29,11 @@
 
 .margin-auto {
   margin: auto;
+}
+
+.landing-logo {
+  height: 345px;
+  margin-bottom: 2rem;
 }
 
 .form-title {
@@ -47,6 +56,10 @@
 
 .float-left {
   float: left;
+}
+
+.float-right {
+  float: right;
 }
 
 .width-25 {
@@ -86,6 +99,17 @@
   color: white;
   font-size: 1rem;
   padding: 3px 5px;
+  width: 105px;
+}
+
+.login-btn {
+  border: 0;
+  border-radius: 30px;
+  color: white;
+  font-size: 1rem;
+  padding: 3px 5px;
+
+  /* padding: 9px ?px */
   width: 105px;
 }
 
@@ -224,6 +248,12 @@
   text-align: right;
   border-radius: 0 0 0 20px;
   font-weight: 600;
+}
+
+.absolute-login {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .drawer-close {
