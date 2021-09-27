@@ -208,6 +208,24 @@
   padding-top: 5px;
 }
 
+.invisible-btn {
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+}
+
+.register-btn {
+  color: white;
+  border: none;
+  border-radius: 50px;
+  background: rgb(49, 152, 252);
+  background: linear-gradient(90deg, rgba(49, 152, 252, 1) 0%, rgba(147, 32, 224, 1) 50%, rgba(237, 16, 91, 1) 100%);
+  font-size: 1rem;
+  height: 36px;
+  width: 200px;
+}
+
 .padding-vert-10n25 {
   padding-top: 10px;
   padding-bottom: 25px;

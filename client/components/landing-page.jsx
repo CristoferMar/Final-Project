@@ -19,10 +19,8 @@ export default class LogIn extends React.Component {
           </div>
 
           <div className="flex align-center column">
-            <div>
-              <img className="landing-logo" src="/images/landing-logo.svg" alt="" />
-            </div>
-            <a><img className="click" src="/images/register-now.svg" alt="" /></a>
+            <img className="landing-logo" src="/images/landing-logo.svg" alt="" />
+            <button className="register-btn click" >Register Now</button>
           </div>
 
         </div>
