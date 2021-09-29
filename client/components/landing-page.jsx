@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class LogIn extends React.Component {
+export default class Lander extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ export default class LogIn extends React.Component {
             <button className="login-btn blue-fill click">Demo User</button>
           </div>
 
-          <div className="flex align-center column">
+          <div className="center-content align-center column large-logo">
             <img className="landing-logo" src="/images/landing-logo.svg" alt="One-Two-Date Logo" />
             <button className="register-btn click" >Register Now</button>
           </div>

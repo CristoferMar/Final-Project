@@ -326,3 +326,7 @@
 .font-small {
   font-size: 0.8rem;
 }
+
+.large-logo {
+  min-height: 460px;
+}
