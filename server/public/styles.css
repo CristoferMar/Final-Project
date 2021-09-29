@@ -106,11 +106,8 @@
   border: 0;
   border-radius: 30px;
   color: white;
+  padding: 5px 10px;
   font-size: 1rem;
-  padding: 3px 5px;
-
-  /* padding: 9px ?px */
-  width: 105px;
 }
 
 .full-width {
@@ -202,6 +199,10 @@
 
 .padding-10 {
   padding: 10px;
+}
+
+.padding-15n10 {
+  padding: 15px 10px;
 }
 
 .padding-top-5 {

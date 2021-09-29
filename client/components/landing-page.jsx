@@ -13,14 +13,14 @@ export default class Lander extends React.Component {
       <>
         <div className="full-width center-content align-center">
 
-          <div className="absolute-login float-right padding-10">
-            <button className="login-btn blue-fill margin-right-10 click">Log In</button>
-            <button className="login-btn blue-fill click">Demo User</button>
+          <div className="absolute-login float-right padding-15n10">
+            <a href="#Log-In" className="login-btn blue-fill margin-right-10 click">Log In</a>
+            <a className="login-btn blue-fill click">Demo User</a>
           </div>
 
           <div className="center-content align-center column large-logo">
             <img className="landing-logo" src="/images/landing-logo.svg" alt="One-Two-Date Logo" />
-            <button className="register-btn click" >Register Now</button>
+            <a href="#Sign-Up" className="register-btn click center-content align-center">Register Now</a>
           </div>
 
         </div>
