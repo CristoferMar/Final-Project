@@ -58,7 +58,7 @@ export default class App extends React.Component {
 
   render() {
     const { path } = this.state.route;
-    const withNav = !['New-List', 'New-Date', 'Langing-Page', ''].includes(path);
+    const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
     return (
       <>
