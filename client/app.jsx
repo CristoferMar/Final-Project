@@ -8,8 +8,7 @@ import ListDetails from './components/list-details';
 import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
-import Login from './components/log-in';
-import SignUp from './components/sign-up';
+import SignOn from './components/sign-on';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,11 +29,8 @@ export default class App extends React.Component {
     if (route.path === 'Landing-Page' || route.path === '') {
       return <Lander />;
     }
-    if (route.path === 'Log-In') {
-      return <Login />;
-    }
-    if (route.path === 'Sign-Up') {
-      return <SignUp />;
+    if (route.path === 'Sign-Up' || route.path === 'Log-In') {
+      return <SignOn />;
     }
     if (route.path === 'My-Lists') {
       return <UserLists />;
