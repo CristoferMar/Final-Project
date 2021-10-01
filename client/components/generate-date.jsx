@@ -80,7 +80,7 @@ export default class GenerateDate extends React.Component {
           <form className="height-100-percent" onSubmit={this.handleSubmit}>
             <div className="flex align-center height-XX-percent">
               <div className="form-container border-white">
-                <label htmlFor="listChoices">Which list are we using?</label>
+                <label htmlFor="listChoiseId">Which list are we using?</label>
                 <select name="listChoiseId" id="listChoiseId"
                   className="text-box margin-bottom-7rm"
                   defaultValue={this.state.listChoiseId}

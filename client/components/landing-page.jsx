@@ -10,7 +10,6 @@ export default class Lander extends React.Component {
 
   render() {
     return (
-      <>
         <div className="full-width center-content align-center">
 
           <div className="absolute-login float-right padding-15n10">
@@ -24,7 +23,6 @@ export default class Lander extends React.Component {
           </div>
 
         </div>
-      </>
     );
   }
 
