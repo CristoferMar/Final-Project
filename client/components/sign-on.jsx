@@ -31,7 +31,7 @@ export default class SignOn extends React.Component {
             <div className="full-width">
 
               <label htmlFor="userName">User Name</label>
-              <input name="userName" type="text" id="userName" required className="text-box margin-bottom-7rm" maxLength="30" />
+              <input autoFocus name="userName" type="text" id="userName" required className="text-box margin-bottom-7rm" maxLength="30" />
 
               <label htmlFor="userPassword">Password</label>
               <input name="userPassword" maxLength="30" type="password" id="userPassword" required className="text-box margin-bottom-7rm" />
