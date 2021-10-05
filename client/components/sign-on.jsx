@@ -6,17 +6,24 @@ export default class SignOn extends React.Component {
     this.state = {
       isLogIn: window.location.hash === '#Log-In'
     };
+    this.changePage = this.changePage.bind(this);
+  }
+
+  changePage(event) {
+    event.preventDefault();
+    window.location.hash = this.state.isLogIn ? '#Sign-Up' : '#Log-In';
+    this.setState({ isLogIn: !this.state.isLogIn });
   }
 
   render() {
     return (
       <>
         <div className="absolute-login float-right">
-          <a href={this.state.isLogIn ? '#Sign-Up' : '#Log-In'} className="login-btn blue-fill margin-right-10 click">{this.state.isLogIn ? 'Sign Up' : 'Log In'}</a>
-          <a className="login-btn blue-fill click">Demo User</a>
+          <button onClick={this.changePage} className="width-80px white login-btn blue-fill margin-right-10 click">{this.state.isLogIn ? 'Sign Up' : 'Log In'}</button>
+          <button className="white login-btn blue-fill click">Demo User</button>
         </div>
 
-        <div className="full-width center-content align-center">
+        <div className="margin-top full-width center-content align-center ">
 
           <form action="" className="flex align-center column register-border space-between">
             <img className="small-logo" src="/images/small-logo.svg" alt="One Two Date" />
@@ -30,7 +37,7 @@ export default class SignOn extends React.Component {
               <input name="userPassword" maxLength="30" type="password" id="userPassword" required className="text-box margin-bottom-7rm" />
             </div>
             <div className="full-width">
-              <button className="float-right login-btn blue-fill white click">{this.state.isLogIn ? 'Sign In' : 'Sign Up'}</button>
+              <button className="float-right login-btn blue-fill white width-80px click">{this.state.isLogIn ? 'Sign In' : 'Sign Up'}</button>
             </div>
           </form>
 
