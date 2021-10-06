@@ -11,6 +11,37 @@ export default class SignOn extends React.Component {
     };
     this.changePage = this.changePage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.isLogIn) {
+
+      console.log('this is the login');
+
+    } else {
+
+      const req = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: this.state.userName,
+          password: this.state.userPassword
+        })
+      };
+      fetch('/api/auth/sign-up', req)
+        .then(res => res.json())
+        .then(result => {
+          result.userId
+            ? console.log(result)
+            : alert(
+              `Error: User Name "${this.state.userName}" may already be taken.
+          Or you may need to check your network connection.
+              `);
+        })
+        .catch(err => console.error(err));
+    }
   }
 
   handleChange() {
@@ -20,12 +51,12 @@ export default class SignOn extends React.Component {
 
   changePage(event) {
     event.preventDefault();
-    window.location.hash = this.state.isLogIn ? '#Sign-Up' : '#Log-In';
     this.setState({
       isLogIn: !this.state.isLogIn,
       userName: '',
       userPassword: ''
     });
+    window.location.hash = this.state.isLogIn ? '#Sign-Up' : '#Log-In';
   }
 
   render() {
