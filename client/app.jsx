@@ -26,7 +26,7 @@ export default class App extends React.Component {
 
   renderPage() {
     const route = this.state.route;
-    if (route.path === 'Landing-Page' || route.path === '') {
+    if (route.path === '') {
       return <Lander />;
     }
     if (route.path === 'Sign-Up' || route.path === 'Log-In') {
