@@ -18,7 +18,7 @@ export default class SignOn extends React.Component {
     event.preventDefault();
     if (this.state.isLogIn) {
 
-      console.log('this is the login');
+      return 'log-in logic here';
 
     } else {
 
@@ -34,11 +34,8 @@ export default class SignOn extends React.Component {
         .then(res => res.json())
         .then(result => {
           result.userId
-            ? console.log(result)
-            : alert(
-              `Error: User Name "${this.state.userName}" may already be taken.
-          Or you may need to check your network connection.
-              `);
+            ? alert(`Welcome new user, ${this.state.userName}`)
+            : alert(`Error: User Name "${this.state.userName}" may already be taken.`);
         })
         .catch(err => console.error(err));
     }
