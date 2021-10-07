@@ -220,7 +220,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
           if (result.rows[0]) {
             res.status(201).json(result.rows[0]);
           } else {
-            throw new ClientError(401, 'This user name is already taken.');
+            throw new ClientError(409, 'This user name is already taken.');
           }
           res.status(201).json(result.rows[0]);
         })
