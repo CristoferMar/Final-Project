@@ -4,6 +4,7 @@ const express = require('express');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const argon2 = require('argon2');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -193,6 +194,37 @@ app.patch('/api/dateActive/:dateId', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       res.sendStatus(204);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-up', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'Username and password are required fields.');
+  }
+
+  argon2.hash(password)
+    .then(hash => {
+      const sql = `
+      insert into
+      "users" ("userName", "password")
+      values ($1, $2)
+      on conflict ("userName")
+      do nothing
+      returning "userId", "userName", "createdAt"
+      `;
+      const params = [username, hash];
+      db.query(sql, params)
+        .then(result => {
+          if (result.rows[0]) {
+            res.status(201).json(result.rows[0]);
+          } else {
+            throw new ClientError(409, 'This user name is already taken.');
+          }
+          res.status(201).json(result.rows[0]);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });

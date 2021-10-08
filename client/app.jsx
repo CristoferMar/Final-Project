@@ -7,6 +7,8 @@ import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
 import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
+import Lander from './components/landing-page';
+import SignOn from './components/sign-on';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -24,6 +26,12 @@ export default class App extends React.Component {
 
   renderPage() {
     const route = this.state.route;
+    if (route.path === '') {
+      return <Lander />;
+    }
+    if (route.path === 'Sign-Up' || route.path === 'Log-In') {
+      return <SignOn />;
+    }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
@@ -46,7 +54,7 @@ export default class App extends React.Component {
 
   render() {
     const { path } = this.state.route;
-    const withNav = !['New-List', 'New-Date'].includes(path);
+    const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
     return (
       <>

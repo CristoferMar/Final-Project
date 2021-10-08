@@ -12,6 +12,10 @@
   display: flex;
 }
 
+.column {
+  flex-direction: column;
+}
+
 .align-center {
   align-items: center;
 }
@@ -27,9 +31,24 @@
   margin: auto;
 }
 
+.landing-logo {
+  height: 345px;
+  margin-bottom: 2rem;
+}
+
 .form-title {
   text-align: center;
   margin-bottom: 0.7rem;
+}
+
+.register-border {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  max-height: 430px;
+  max-width: 375px;
+  height: 65%;
+  min-height: 360px;
 }
 
 .center-content {
@@ -47,6 +66,10 @@
 
 .float-left {
   float: left;
+}
+
+.float-right {
+  float: right;
 }
 
 .width-25 {
@@ -89,6 +112,13 @@
   width: 105px;
 }
 
+.login-btn {
+  border: 0;
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
 .full-width {
   width: 100%;
 }
@@ -121,12 +151,12 @@
   cursor: pointer;
 }
 
-.click-up {
-  cursor: pointer;
-}
-
 .click:active {
   transform: translateY(2px);
+}
+
+.click-up {
+  cursor: pointer;
 }
 
 .click-up:active {
@@ -184,6 +214,24 @@
   padding-top: 5px;
 }
 
+.invisible-btn {
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+}
+
+.register-btn {
+  color: white;
+  border: none;
+  border-radius: 50px;
+  background: rgb(49, 152, 252);
+  background: linear-gradient(90deg, rgba(49, 152, 252, 1) 0%, rgba(147, 32, 224, 1) 50%, rgba(237, 16, 91, 1) 100%);
+  font-size: 1rem;
+  height: 36px;
+  width: 200px;
+}
+
 .padding-vert-10n25 {
   padding-top: 10px;
   padding-bottom: 25px;
@@ -224,6 +272,12 @@
   text-align: right;
   border-radius: 0 0 0 20px;
   font-weight: 600;
+}
+
+.absolute-login {
+  position: absolute;
+  top: 15px;
+  right: 10px;
 }
 
 .drawer-close {
@@ -277,4 +331,22 @@
 
 .font-small {
   font-size: 0.8rem;
+}
+
+.large-logo {
+  min-height: 460px;
+}
+
+.sign-on-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.white {
+  color: white;
+}
+
+.width-80px {
+  width: 80px;
 }
