@@ -1,5 +1,4 @@
 .page {
-  /* min-height: 460px; */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -119,10 +118,6 @@
   padding: 5px 10px;
   font-size: 1rem;
 }
-
-/* .margin-top {
-  margin-top: 30px;
-} */
 
 .full-width {
   width: 100%;
