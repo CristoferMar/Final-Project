@@ -5,6 +5,7 @@ const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -223,6 +224,42 @@ app.post('/api/auth/sign-up', (req, res, next) => {
             throw new ClientError(409, 'This user name is already taken.');
           }
           res.status(201).json(result.rows[0]);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'Username and password are required fields.');
+  }
+
+  const sql = `
+  select "userId", "password"
+  from "users"
+  where "userName" = $1
+  `;
+  const params = [username];
+
+  db.query(sql, params)
+    .then(response => {
+      if (response.rowCount < 1) {
+        throw new ClientError(401, 'invalid login');
+      }
+
+      argon2.verify(response.rows[0].password, password)
+        .then(matchTest => {
+          if (!matchTest) {
+            throw new ClientError(401, 'invalid login');
+          } else {
+            const payload = { userId: response.rows[0].userId, username: username };
+            const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+            const wholeResponse = { token: token, user: payload };
+            // console.log('wholeResponse:', wholeResponse);
+            res.status(200).json(wholeResponse);
+          }
         })
         .catch(err => next(err));
     })
