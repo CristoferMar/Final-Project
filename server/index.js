@@ -90,6 +90,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+/* ⛔ Every route after this middleware requires a token! ⛔ */
 app.use(authorizationMiddleware);
 
 app.post('/api/lists', (req, res, next) => {

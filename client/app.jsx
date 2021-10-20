@@ -9,19 +9,48 @@ import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
+import decodeToken from './lib/decode-token';
+
+// This is what any given token looks like:
+// {
+//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ3LCJ1c2VybmFtZSI6InlvWDMiLCJpYXQiOjE2MzQ2ODY3ODB9.pDXNIQPcAV6nIjh7ho_zQ1gVPK5VayeegTiOJEldQ6I",
+//     "user": {
+//     "userId": 47,
+//       "username": "yoX3"
+//   }
+// }
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? decodeToken(token) : null;
+    this.setState({ user, isAuthorizing: false });
+  }
+
+  handleSignIn(result) {
+    const { user, token } = result;
+    window.localStorage.setItem('react-context-jwt', token);
+    this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-context-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
