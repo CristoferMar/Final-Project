@@ -42,12 +42,15 @@ export default class App extends React.Component {
     this.setState({ user, isAuthorizing: false });
   }
 
+  // handleSignIn might be better suited for the sign-on.jsx component.
+  // not sure if this will work, but maybe app.jsx can reckeck if localstarage.user exists, to determine next action
   handleSignIn(result) {
     const { user, token } = result;
     window.localStorage.setItem('react-context-jwt', token);
     this.setState({ user });
   }
 
+  // handleSignOut might be better suited to go into the navbar, where users can access the sign out button
   handleSignOut() {
     window.localStorage.removeItem('react-context-jwt');
     this.setState({ user: null });
