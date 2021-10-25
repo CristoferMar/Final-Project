@@ -8,6 +8,7 @@ export default class Navbar extends React.Component {
     };
     this.handleDrawer = this.handleDrawer.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   handleDrawer(event) {
@@ -15,6 +16,13 @@ export default class Navbar extends React.Component {
       ? 'drawer-close'
       : 'drawer-open';
     this.setState({ drawerOpened: drawerStatus });
+  }
+
+  handleSignOut() {
+    console.log('successfully signed out!');
+    window.localStorage.removeItem('one-two-date-jwt');
+    this.setState({ user: null });
+    window.location.hash = '';
   }
 
   handleClick() {
@@ -41,7 +49,7 @@ export default class Navbar extends React.Component {
           <p className="click nav-btn padding-top-5" onClick={this.handleClick}>My Lists</p>
           <p className="click nav-btn padding-top-5" onClick={this.handleClick}>My History</p>
           <hr className="solid" />
-          <p className="red click ">Sign Out</p>
+          <p className="red click " onClick={this.handleSignOut}>Sign Out</p>
         </div>
       </>
     );

@@ -10,6 +10,7 @@ import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
 import decodeToken from './lib/decode-token';
+// import AppContext from './lib/app-context';
 
 // This is what any given token looks like:
 // {
@@ -46,13 +47,13 @@ export default class App extends React.Component {
   // not sure if this will work, but maybe app.jsx can reckeck if localstarage.user exists, to determine next action
   handleSignIn(result) {
     const { user, token } = result;
-    window.localStorage.setItem('react-context-jwt', token);
+    window.localStorage.setItem('one-two-date-jwt', token);
     this.setState({ user });
   }
 
   // handleSignOut might be better suited to go into the navbar, where users can access the sign out button
   handleSignOut() {
-    window.localStorage.removeItem('react-context-jwt');
+    window.localStorage.removeItem('one-two-date-jwt');
     this.setState({ user: null });
   }
 
@@ -88,7 +89,14 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
+
+    // if (this.state.isAuthorizing) return null;
+    // const { user, route } = this.state;
+    // const { handleSignIn, handleSignOut } = this;
+    // const contextValue = { user, route, handleSignIn, handleSignOut };
+
     return (
+      // <AppContext.Provider value={contextValue}>
       <>
         {withNav &&
           <Navbar path={path} />
@@ -98,6 +106,7 @@ export default class App extends React.Component {
           {this.renderPage(this.state.route)}
         </div>
       </>
+      // </AppContext.Provider>
     );
   }
 }
