@@ -17,8 +17,29 @@ export default class SignOn extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.isLogIn) {
+      console.log('they are logging in');
+      // '/api/auth/sign-up';
+      const req = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: this.state.userName,
+          password: this.state.userPassword
+        })
+      };
 
-      return 'log-in logic here';
+      fetch('/api/auth/sign-in', req)
+        .then(res => res.json())
+        .then(result => {
+          console.log('result:', result);
+          if (result.error) {
+            alert(`Error: ${result.error}`);
+            this.setState({ userPassword: '' });
+          } else {
+            alert("You've succesfully logged in");
+          }
+        })
+        .catch(err => console.error(err));
 
     } else {
 

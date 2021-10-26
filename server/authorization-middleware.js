@@ -10,6 +10,7 @@ function authorizationMiddleware(req, res, next) {
   const pulledPayload = jwt.verify(currentToken, process.env.TOKEN_SECRET);
 
   req.user = pulledPayload;
+  console.log('authorizationMiddleware pulledPayload:', pulledPayload);
   next();
 }
 

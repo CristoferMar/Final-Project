@@ -29,8 +29,8 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleSignOut = this.handleSignOut.bind(this);
+    // this.handleSignIn = this.handleSignIn.bind(this);
+    // this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -45,17 +45,17 @@ export default class App extends React.Component {
 
   // handleSignIn might be better suited for the sign-on.jsx component.
   // not sure if this will work, but maybe app.jsx can reckeck if localstarage.user exists, to determine next action
-  handleSignIn(result) {
-    const { user, token } = result;
-    window.localStorage.setItem('one-two-date-jwt', token);
-    this.setState({ user });
-  }
+  // handleSignIn(result) {
+  //   const { user, token } = result;
+  //   window.localStorage.setItem('one-two-date-jwt', token);
+  //   this.setState({ user });
+  // }
 
   // handleSignOut might be better suited to go into the navbar, where users can access the sign out button
-  handleSignOut() {
-    window.localStorage.removeItem('one-two-date-jwt');
-    this.setState({ user: null });
-  }
+  // handleSignOut() {
+  //   window.localStorage.removeItem('one-two-date-jwt');
+  //   this.setState({ user: null });
+  // }
 
   renderPage() {
     const route = this.state.route;
