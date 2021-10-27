@@ -37,6 +37,8 @@ export default class SignOn extends React.Component {
             this.setState({ userPassword: '' });
           } else {
             alert("You've succesfully logged in");
+            window.localStorage.setItem('one-two-date-jwt', JSON.stringify(result));
+            location.reload();
           }
         })
         .catch(err => console.error(err));

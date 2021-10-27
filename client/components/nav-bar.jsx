@@ -19,10 +19,11 @@ export default class Navbar extends React.Component {
   }
 
   handleSignOut() {
-    console.log('successfully signed out!');
     window.localStorage.removeItem('one-two-date-jwt');
-    this.setState({ user: null });
-    window.location.hash = '';
+    // this.setState({ user: null });
+    console.log('successfully signed out!');
+    // window.location.hash = '';
+    location.reload();
   }
 
   handleClick() {
@@ -33,6 +34,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    // const userName = this.props.username.toString().charAt(0).toUpperCase();
     let title = this.props.path;
     title = title.replace('-', ' ');
     return (

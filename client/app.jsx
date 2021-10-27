@@ -9,7 +9,7 @@ import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
-import decodeToken from './lib/decode-token';
+// import decodeToken from './lib/decode-token';
 // import AppContext from './lib/app-context';
 
 // This is what any given token looks like:
@@ -25,7 +25,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
@@ -38,9 +38,10 @@ export default class App extends React.Component {
       this.setState({ route: parseRoute(window.location.hash) });
     });
 
-    const token = window.localStorage.getItem('react-context-jwt');
-    const user = token ? decodeToken(token) : null;
-    this.setState({ user, isAuthorizing: false });
+    // const token = JSON.parse(window.localStorage.getItem('one-two-date-jwt'));
+    // token = token ? decodeToken(token.token) : null;
+    console.log('token:', this.state.token);
+    // this.setState({ token, isAuthorizing: false });
   }
 
   // handleSignIn might be better suited for the sign-on.jsx component.
@@ -58,13 +59,17 @@ export default class App extends React.Component {
   // }
 
   renderPage() {
-    const route = this.state.route;
-    if (route.path === '') {
-      return <Lander />;
-    }
-    if (route.path === 'Sign-Up' || route.path === 'Log-In') {
-      return <SignOn />;
-    }
+    // this.setState({ token: JSON.parse(window.localStorage.getItem('react-context-jwt')) });
+    const { token, route } = this.state;
+    if (!token) {
+      if (route.path === '') {
+        return <Lander />;
+      } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
+        return <SignOn />;
+      } else {
+        window.location.hash = '';
+      }
+    } else { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
@@ -99,7 +104,7 @@ export default class App extends React.Component {
       // <AppContext.Provider value={contextValue}>
       <>
         {withNav &&
-          <Navbar path={path} />
+          <Navbar path={path} username={this.state.token} />
         }
 
         <div className={pageClass}>
