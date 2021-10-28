@@ -14,6 +14,10 @@ export default class SignOn extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    console.log('props:', this.props);
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.isLogIn) {
@@ -38,7 +42,8 @@ export default class SignOn extends React.Component {
           } else {
             alert("You've succesfully logged in");
             window.localStorage.setItem('one-two-date-jwt', JSON.stringify(result));
-            location.reload();
+            this.props.signInHandler();
+            // location.reload();
           }
         })
         .catch(err => console.error(err));

@@ -18,6 +18,7 @@ export default class Navbar extends React.Component {
     this.setState({ drawerOpened: drawerStatus });
   }
 
+  // Using reload to force the app to get logalStorage in App.jsx constructor (this can be resolved with context)
   handleSignOut() {
     window.localStorage.removeItem('one-two-date-jwt');
     // this.setState({ user: null });

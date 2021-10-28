@@ -29,8 +29,9 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
     // this.handleSignIn = this.handleSignIn.bind(this);
-    // this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +43,17 @@ export default class App extends React.Component {
     // token = token ? decodeToken(token.token) : null;
     console.log('token:', this.state.token);
     // this.setState({ token, isAuthorizing: false });
+  }
+
+  handleSignIn() {
+    console.log('you invoked app.handleSignIn');
+    this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+  }
+
+  handleSignOut() {
+    console.log('you invoked app.handleSignOut');
+    this.setState({ isAuthorizing: true, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+
   }
 
   // handleSignIn might be better suited for the sign-on.jsx component.
@@ -60,12 +72,12 @@ export default class App extends React.Component {
 
   renderPage() {
     // this.setState({ token: JSON.parse(window.localStorage.getItem('react-context-jwt')) });
-    const { token, route } = this.state;
-    if (!token) {
+    const { isAuthorizing, route } = this.state;
+    if (isAuthorizing) {
       if (route.path === '') {
         return <Lander />;
       } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
-        return <SignOn />;
+        return <SignOn signInHandler={this.handleSignIn}/>;
       } else {
         window.location.hash = '';
       }
