@@ -26,7 +26,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
-      isAuthorizing: true,
+      isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
@@ -116,7 +116,7 @@ export default class App extends React.Component {
       // <AppContext.Provider value={contextValue}>
       <>
         {withNav &&
-          <Navbar path={path} username={this.state.token} />
+          <Navbar path={path} username={this.state.token} signOutHandler={this.handleSignOut} />
         }
 
         <div className={pageClass}>

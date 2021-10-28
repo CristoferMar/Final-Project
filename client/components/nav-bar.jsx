@@ -24,7 +24,8 @@ export default class Navbar extends React.Component {
     // this.setState({ user: null });
     console.log('successfully signed out!');
     // window.location.hash = '';
-    location.reload();
+    // location.reload();
+    this.props.signOutHandler();
   }
 
   handleClick() {

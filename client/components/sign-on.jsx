@@ -61,9 +61,11 @@ export default class SignOn extends React.Component {
       fetch('/api/auth/sign-up', req)
         .then(res => res.json())
         .then(result => {
-          result.userId
-            ? alert(`Welcome new user, ${this.state.userName}`)
-            : alert(`Error: User Name "${this.state.userName}" may already be taken.`);
+          if (result.userId) {
+            alert(`Welcome new user, ${this.state.userName}`);
+          } else {
+            alert(`Error: User Name "${this.state.userName}" may already be taken.`);
+          }
         })
         .catch(err => console.error(err));
     }
