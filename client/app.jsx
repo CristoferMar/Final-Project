@@ -9,16 +9,14 @@ import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
-// import decodeToken from './lib/decode-token';
-// import AppContext from './lib/app-context';
 
 // This is what any given token looks like:
 // {
-//   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ3LCJ1c2VybmFtZSI6InlvWDMiLCJpYXQiOjE2MzQ2ODY3ODB9.pDXNIQPcAV6nIjh7ho_zQ1gVPK5VayeegTiOJEldQ6I",
-//     "user": {
-//     "userId": 47,
-//       "username": "yoX3"
-//   }
+//    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ3LCJ1c2VybmFtZSI6InlvWDMiLCJpYXQiOjE2MzQ2ODY3ODB9.pDXNIQPcAV6nIjh7ho_zQ1gVPK5VayeegTiOJEldQ6I",
+//    "user": {
+//        "userId": 47,
+//        "username": "yoX3"
+//     }
 // }
 
 export default class App extends React.Component {
@@ -31,47 +29,23 @@ export default class App extends React.Component {
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
-    // this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-
-    // const token = JSON.parse(window.localStorage.getItem('one-two-date-jwt'));
-    // token = token ? decodeToken(token.token) : null;
-    console.log('token:', this.state.token);
-    // this.setState({ token, isAuthorizing: false });
   }
 
   handleSignIn() {
-    console.log('you invoked app.handleSignIn');
     this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
   }
 
   handleSignOut() {
-    console.log('you invoked app.handleSignOut');
-    this.setState({ isAuthorizing: true, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
-
+    this.setState({ isAuthorizing: true, token: null });
   }
 
-  // handleSignIn might be better suited for the sign-on.jsx component.
-  // not sure if this will work, but maybe app.jsx can reckeck if localstarage.user exists, to determine next action
-  // handleSignIn(result) {
-  //   const { user, token } = result;
-  //   window.localStorage.setItem('one-two-date-jwt', token);
-  //   this.setState({ user });
-  // }
-
-  // handleSignOut might be better suited to go into the navbar, where users can access the sign out button
-  // handleSignOut() {
-  //   window.localStorage.removeItem('one-two-date-jwt');
-  //   this.setState({ user: null });
-  // }
-
   renderPage() {
-    // this.setState({ token: JSON.parse(window.localStorage.getItem('react-context-jwt')) });
     const { isAuthorizing, route } = this.state;
     if (isAuthorizing) {
       if (route.path === '') {
@@ -106,7 +80,9 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
-
+    const { token } = this.state;
+    const user = token ? token.username : '@';
+    // const userFirstLetter = token ?
     // if (this.state.isAuthorizing) return null;
     // const { user, route } = this.state;
     // const { handleSignIn, handleSignOut } = this;
@@ -116,7 +92,7 @@ export default class App extends React.Component {
       // <AppContext.Provider value={contextValue}>
       <>
         {withNav &&
-          <Navbar path={path} username={this.state.token} signOutHandler={this.handleSignOut} />
+          <Navbar path={path} username={user} signOutHandler={this.handleSignOut} />
         }
 
         <div className={pageClass}>

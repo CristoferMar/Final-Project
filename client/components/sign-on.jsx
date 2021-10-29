@@ -5,51 +5,18 @@ export default class SignOn extends React.Component {
     super(props);
     this.state = {
       isLogIn: window.location.hash === '#Log-In',
+      newUser: window.location.hash === '#Sign-Up',
       userName: '',
       userPassword: ''
-
     };
     this.changePage = this.changePage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    console.log('props:', this.props);
-  }
-
   handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.isLogIn) {
-      console.log('they are logging in');
-      // '/api/auth/sign-up';
-      const req = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: this.state.userName,
-          password: this.state.userPassword
-        })
-      };
-
-      fetch('/api/auth/sign-in', req)
-        .then(res => res.json())
-        .then(result => {
-          console.log('result:', result);
-          if (result.error) {
-            alert(`Error: ${result.error}`);
-            this.setState({ userPassword: '' });
-          } else {
-            alert("You've succesfully logged in");
-            window.localStorage.setItem('one-two-date-jwt', JSON.stringify(result));
-            this.props.signInHandler();
-            // location.reload();
-          }
-        })
-        .catch(err => console.error(err));
-
-    } else {
-
+    if (this.state.newUser) {
+      event.preventDefault();
       const req = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -63,8 +30,35 @@ export default class SignOn extends React.Component {
         .then(result => {
           if (result.userId) {
             alert(`Welcome new user, ${this.state.userName}`);
+            this.setState({ newUser: false });
+            this.handleSubmit();
           } else {
             alert(`Error: User Name "${this.state.userName}" may already be taken.`);
+          }
+        })
+        .catch(err => console.error(err));
+    } else {
+      if (this.state.isLogIn) {
+        event.preventDefault();
+      }
+      const req = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: this.state.userName,
+          password: this.state.userPassword
+        })
+      };
+
+      fetch('/api/auth/sign-in', req)
+        .then(res => res.json())
+        .then(result => {
+          if (result.error) {
+            alert(`Error: ${result.error}`);
+            this.setState({ userPassword: '' });
+          } else {
+            window.localStorage.setItem('one-two-date-jwt', JSON.stringify(result));
+            this.props.signInHandler();
           }
         })
         .catch(err => console.error(err));
@@ -80,6 +74,7 @@ export default class SignOn extends React.Component {
     event.preventDefault();
     this.setState({
       isLogIn: !this.state.isLogIn,
+      newUser: !this.state.newUser,
       userName: '',
       userPassword: ''
     });
