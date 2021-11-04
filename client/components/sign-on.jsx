@@ -29,7 +29,6 @@ export default class SignOn extends React.Component {
         .then(res => res.json())
         .then(result => {
           if (result.userId) {
-            alert(`Welcome new user, ${this.state.userName}`);
             this.setState({ newUser: false });
             this.handleSubmit();
           } else {
@@ -38,9 +37,7 @@ export default class SignOn extends React.Component {
         })
         .catch(err => console.error(err));
     } else {
-      if (this.state.isLogIn) {
-        event.preventDefault();
-      }
+      if (this.state.isLogIn) event.preventDefault();
       const req = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

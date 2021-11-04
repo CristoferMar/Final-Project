@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -11,6 +12,15 @@ export default class Navbar extends React.Component {
     this.handleSignOut = this.handleSignOut.bind(this);
   }
 
+  // componentDidMount() {
+  //   const contextType = AppContext;
+  //   console.log('this:', this);
+
+  //   console.log('this.context:', this.context);
+  //   console.log('this.context.token.user.username:', this.context.token.user.username);
+
+  // }
+
   handleDrawer(event) {
     const drawerStatus = this.state.drawerOpened === 'drawer-open'
       ? 'drawer-close'
@@ -21,6 +31,8 @@ export default class Navbar extends React.Component {
   handleSignOut() {
     window.localStorage.removeItem('one-two-date-jwt');
     this.props.signOutHandler();
+    console.log('the sign out action has run');
+    window.location.hash = '';
   }
 
   handleClick() {
@@ -31,7 +43,10 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    // const userName = this.props.username.toString().charAt(0).toUpperCase();
+    const userName = this.context.token ? this.context.token.user.username : null;
+    let userNameFirst = null;
+    if (userName) { userNameFirst = userName.toString().charAt(0); }
+    // console.log('userName:', userName);
     let title = this.props.path;
     title = title.replace('-', ' ');
     return (
@@ -40,7 +55,10 @@ export default class Navbar extends React.Component {
           <img className="small-logo click" src="/images/small-logo.svg" alt="small logo 1, 2, Date" />
           <div className="center-content ">
             <p className="blue weight-800 center-content align-center">{title}</p>
-            <div className="center-content user-circle click" onClick={this.handleDrawer}>U</div>
+            <div className="center-content user-circle click" onClick={this.handleDrawer}>
+              {/* U */}
+              {userNameFirst}
+            </div>
           </div>
         </div>
         <div className={'absolute ' + this.state.drawerOpened}>
@@ -54,3 +72,5 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+Navbar.contextType = AppContext;

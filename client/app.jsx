@@ -1,7 +1,8 @@
 import React from 'react';
+import parseRoute from './lib/parse-route';
+import AppContext from './lib/app-context';
 import Navbar from './components/nav-bar';
 import UserLists from './components/user-lists';
-import parseRoute from './lib/parse-route';
 import NewListForm from './components/new-list-form';
 import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
@@ -80,26 +81,29 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
-    const { token } = this.state;
-    const user = token ? token.username : '@';
+    // const user = token ? token.username : null;
     // const userFirstLetter = token ?
     // if (this.state.isAuthorizing) return null;
     // const { user, route } = this.state;
     // const { handleSignIn, handleSignOut } = this;
-    // const contextValue = { user, route, handleSignIn, handleSignOut };
+
+    const token = this.state.token ? this.state.token : null;
+    const contextValue = { token };
 
     return (
-      // <AppContext.Provider value={contextValue}>
-      <>
+      <AppContext.Provider value={contextValue}>
+      {/* <> */}
         {withNav &&
-          <Navbar path={path} username={user} signOutHandler={this.handleSignOut} />
+          <Navbar path={path} signOutHandler={this.handleSignOut} />
         }
 
         <div className={pageClass}>
           {this.renderPage(this.state.route)}
         </div>
-      </>
-      // </AppContext.Provider>
+      {/* </> */}
+      </AppContext.Provider>
     );
   }
 }
+
+App.contextType = AppContext;
