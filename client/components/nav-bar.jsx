@@ -43,7 +43,7 @@ export default class Navbar extends React.Component {
   }
 
   render() {
-    const userName = this.context.token ? this.context.token.user.username : null;
+    const userName = this.context.token ? this.context.token.user : null;
     let userNameFirst = null;
     if (userName) { userNameFirst = userName.toString().charAt(0); }
     // console.log('userName:', userName);

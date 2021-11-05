@@ -47,7 +47,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
           } else {
             throw new ClientError(409, 'This user name is already taken.');
           }
-          res.status(201).json(result.rows[0]);
         })
         .catch(err => next(err));
     })
@@ -80,8 +79,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           } else {
             const payload = { userId: response.rows[0].userId, username: username };
             const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-            const wholeResponse = { token: token, user: payload };
-            // console.log('wholeResponse:', wholeResponse);
+            const wholeResponse = { token: token, user: username };
             res.status(200).json(wholeResponse);
           }
         })
@@ -223,18 +221,18 @@ app.get('/api/random', (req, res, next) => {
 });
 
 app.post('/api/history', (req, res, next) => {
-  let { userId, dateId } = req.body;
-  userId = parseInt(userId);
+  const { userId } = req.user;
+  let { dateId } = req.body;
   dateId = parseInt(dateId);
   if (!Number.isInteger(dateId) || !Number.isInteger(userId)) {
     throw new ClientError(400, 'Both userId and dateId need to be positive integers.');
   }
   const sql = `
     insert into "history" ("dateId", "userId")
-    values ($1, 1)
+    values ($1, $2)
     returning "dateId", "addedAt"
   `;
-  const params = [dateId];
+  const params = [dateId, userId];
   db.query(sql, params)
     .then(result => {
       res.status(201).json(result.rows[0]);
@@ -243,15 +241,17 @@ app.post('/api/history', (req, res, next) => {
 });
 
 app.get('/api/history', (req, res, next) => {
+  const { userId } = req.user;
   const sql = `
     select "dates"."dateIdea", "lists"."listTitle", "dates"."dateId", "history"."addedAt"
     from "dates"
     join "history" using("dateId")
     join "lists" using("listId")
-    where "history"."userId" = 1
+    where "history"."userId" = $1
     order by "addedAt" desc
   `;
-  db.query(sql)
+  const params = [userId];
+  db.query(sql, params)
     .then(result => {
       res.status(200).json(result.rows);
     })

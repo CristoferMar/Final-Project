@@ -13,7 +13,7 @@ export default class ListDetails extends React.Component {
 
   componentDidMount() {
     const { token } = this.context.token;
-    this.setState({ token: token });
+    this.setState({ token });
 
     const req = {
       method: 'GET',
