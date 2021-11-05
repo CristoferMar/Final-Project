@@ -93,6 +93,23 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 /* ⛔ Every route after this middleware requires a token! ⛔ */
 app.use(authorizationMiddleware);
 
+app.get('/api/lists', (req, res, next) => {
+  const { userId } = req.user;
+  console.log('we reached get: lists');
+  const sql = `
+    select "listId", "listTitle", "isPublic"
+    from "lists"
+    where "userId" = $1
+    order by "listId" desc;
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/lists', (req, res, next) => {
   const { listName } = req.body;
   if (!listName) {
@@ -149,21 +166,6 @@ app.post('/api/dates', (req, res, next) => {
         throw new ClientError(404, `Could not find a list with listId ${listId}`);
       }
       res.status(201).json(result.rows[0]);
-    })
-    .catch(err => next(err));
-});
-
-app.get('/api/lists', (req, res, next) => {
-  const sql = `
-    select "listId", "listTitle", "isPublic"
-    from "lists"
-    where "userId" = 1
-    order by "listId" desc;
-  `;
-  const params = [];
-  db.query(sql, params)
-    .then(result => {
-      res.status(200).json(result.rows);
     })
     .catch(err => next(err));
 });

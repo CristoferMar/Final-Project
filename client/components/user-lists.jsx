@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class UserLists extends React.Component {
   constructor(props) {
@@ -10,9 +11,16 @@ export default class UserLists extends React.Component {
   }
 
   componentDidMount() {
+    console.log('this.context.token:', this.context.token);
+    const { token } = this.context.token;
+    console.log('just the token:', token);
+
     const req = {
       method: 'GET',
-      header: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch('/api/lists', req)
       .then(res => res.json())
@@ -62,3 +70,5 @@ export default class UserLists extends React.Component {
     );
   }
 }
+
+UserLists.contextType = AppContext;
