@@ -93,12 +93,11 @@ app.use(authorizationMiddleware);
 
 app.get('/api/lists', (req, res, next) => {
   const { userId } = req.user;
-  console.log('we reached get: lists');
   const sql = `
     select "listId", "listTitle", "isPublic"
-    from "lists"
-    where "userId" = $1
-    order by "listId" desc;
+      from "lists"
+      where "userId" = $1
+      order by "listId" desc;
   `;
   const params = [userId];
   db.query(sql, params)
@@ -121,8 +120,8 @@ app.post('/api/lists', (req, res, next) => {
 
   const sql = `
     insert into "lists" ("listTitle", "userId")
-    values ($1, $2)
-    returning "listTitle", "listId"
+      values ($1, $2)
+      returning "listTitle", "listId"
   `;
   const params = [listName, userId];
 
@@ -142,12 +141,12 @@ app.get('/api/dates/:listId', (req, res, next) => {
     throw new ClientError(400, 'The listId must be a positive integer');
   }
   const sql = `
-  select "l"."listId", "l"."listTitle", json_agg("d" order by "d"."dateIdea") as "dateIdeas"
-    from "lists" as "l"
-    left join "dates" as "d" using ("listId")
-    where "l"."userId" = $1
+    select "l"."listId", "l"."listTitle", json_agg("d" order by "d"."dateIdea") as "dateIdeas"
+      from "lists" as "l"
+      left join "dates" as "d" using ("listId")
+      where "l"."userId" = $1
       and "l"."listId" = $2
-    group by "l"."listId"
+      group by "l"."listId"
   `;
 
   const params = [userId, listId];
@@ -182,7 +181,7 @@ app.post('/api/dates', (req, res, next) => {
     )
     insert into "dates" ("listId", "dateIdea", "costAmount")
     select $2, $3, $4
-     where exists (select * from "userList")
+    where exists (select * from "userList")
     returning "listId", "dateId", "dateIdea", "costAmount";
   `;
   const params = [userId, listId, dateIdea, costAmount];
@@ -198,6 +197,7 @@ app.post('/api/dates', (req, res, next) => {
 });
 
 app.get('/api/random', (req, res, next) => {
+  const { userId } = req.user;
   let { listId, costAmount } = req.query;
   listId = parseInt(listId);
   costAmount = parseInt(costAmount);
@@ -205,16 +205,20 @@ app.get('/api/random', (req, res, next) => {
     throw new ClientError(400, 'Both listId and costAmount need to exist in the request, as positive integers');
   }
   const sql = `
-    select * from "dates"
-    where "listId" = $1
-    and "costAmount" = $2
-    and "isActive" = true
-    order by Random()
-    limit 1;
+    select "d"."dateId", "d"."listId", "d"."dateIdea", "d"."costAmount", "d"."isActive"
+      from "dates" as "d"
+      join "lists" as "l" using("listId")
+      where "d"."listId" = $1
+      and "d"."costAmount" = $2
+      and "d"."isActive" = true
+      and "l"."userId" = $3
+      order by Random()
+      limit 1;
   `;
-  const params = [listId, costAmount];
+  const params = [listId, costAmount, userId];
   db.query(sql, params)
     .then(result => {
+      console.log(result.rows);
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
@@ -229,8 +233,8 @@ app.post('/api/history', (req, res, next) => {
   }
   const sql = `
     insert into "history" ("dateId", "userId")
-    values ($1, $2)
-    returning "dateId", "addedAt"
+      values ($1, $2)
+      returning "dateId", "addedAt"
   `;
   const params = [dateId, userId];
   db.query(sql, params)
@@ -243,12 +247,12 @@ app.post('/api/history', (req, res, next) => {
 app.get('/api/history', (req, res, next) => {
   const { userId } = req.user;
   const sql = `
-    select "dates"."dateIdea", "lists"."listTitle", "dates"."dateId", "history"."addedAt"
-    from "dates"
-    join "history" using("dateId")
-    join "lists" using("listId")
-    where "history"."userId" = $1
-    order by "addedAt" desc
+    select "d"."dateIdea", "l"."listTitle", "d"."dateId", "h"."addedAt"
+      from "dates" as "d"
+      join "history" as "h" using("dateId")
+      join "lists" as "l" using("listId")
+      where "h"."userId" = $1
+      order by "addedAt" desc
   `;
   const params = [userId];
   db.query(sql, params)
@@ -265,8 +269,8 @@ app.patch('/api/dateActive/:dateId', (req, res, next) => {
     throw new ClientError(400, 'The userId must be a positive integer.');
   }
   const sql = `
-  UPDATE "dates" SET "isActive" = NOT "isActive"
-  WHERE "dateId" = $1
+  update "dates" SET "isActive" = NOT "isActive"
+  where "dateId" = $1
   `;
   const params = [dateId];
   db.query(sql, params)

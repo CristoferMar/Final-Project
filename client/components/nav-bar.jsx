@@ -44,6 +44,8 @@ export default class Navbar extends React.Component {
 
   render() {
     const userName = this.context.token ? this.context.token.user : null;
+    // const userName = this.context.token.user;
+
     let userNameFirst = null;
     if (userName) { userNameFirst = userName.toString().charAt(0); }
     // console.log('userName:', userName);
@@ -53,7 +55,7 @@ export default class Navbar extends React.Component {
       <>
         <div className='nav-bar padding-10'>
           <a href="#Generate-Date">
-          <img className="small-logo click" src="/images/small-logo.svg" alt="small logo 1, 2, Date" />
+            <img className="small-logo click" src="/images/small-logo.svg" alt="small logo 1, 2, Date" />
           </a>
           <div className="center-content ">
             <p className="blue weight-800 center-content align-center">{title}</p>
