@@ -47,7 +47,7 @@ export default class UserLists extends React.Component {
           </div>
         }
         {
-          this.state.userLists.length &&
+          (this.state.userLists.length > 0 && this.state.listsHaveLoaded) &&
           this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">

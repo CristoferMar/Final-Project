@@ -1,18 +1,26 @@
 import React from 'react';
 import ListItem from './list-item';
+import AppContext from '../lib/app-context';
 
 export default class ListDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: null,
       listData: null
     };
   }
 
   componentDidMount() {
+    const { token } = this.context.token;
+    this.setState({ token: token });
+
     const req = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch(`/api/dates/${this.props.listId}`, req)
       .then(res => res.json())
@@ -60,7 +68,7 @@ export default class ListDetails extends React.Component {
           dateIdeas && dateIdeas[0] &&
             dateIdeas.map(item =>
               <div key={item.dateId} id={item.dateId} className="padding-top-5">
-                <ListItem dateInfo={item} />
+                <ListItem dateInfo={item} token={this.state.token} />
               </div>
             )
         }
@@ -78,3 +86,5 @@ export default class ListDetails extends React.Component {
     );
   }
 }
+
+ListDetails.contextType = AppContext;

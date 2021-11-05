@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import AppContext from '../lib/app-context';
 
 export default function ListItem(props) {
 
@@ -18,7 +19,10 @@ export default function ListItem(props) {
   const setIsActive = () => {
     const req = {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${props.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch(`/api/dateActive/${props.dateInfo.dateId}`, req)
       .then(() => toggleActive(!isActive))
@@ -31,7 +35,7 @@ export default function ListItem(props) {
       <a className="flex click" onClick={e => { e.preventDefault(); setIsActive(); }}>
         <img className="margin-right-10" src={imgURL} alt={imgAlt} />
         <p className={`full-width${strikeClass}`} >{props.dateInfo.dateIdea}</p>
-        </a>
+      </a>
 
         <div className="center-content align-center max-height-31">
           <img className="height-17" src="/images/cost-icon.svg" alt="configure list" />
@@ -43,3 +47,5 @@ export default function ListItem(props) {
       </div>
   );
 }
+
+// ListItem.contextType = AppContext;

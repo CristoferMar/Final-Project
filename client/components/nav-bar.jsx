@@ -52,7 +52,9 @@ export default class Navbar extends React.Component {
     return (
       <>
         <div className='nav-bar padding-10'>
+          <a href="#Generate-Date">
           <img className="small-logo click" src="/images/small-logo.svg" alt="small logo 1, 2, Date" />
+          </a>
           <div className="center-content ">
             <p className="blue weight-800 center-content align-center">{title}</p>
             <div className="center-content user-circle click" onClick={this.handleDrawer}>
