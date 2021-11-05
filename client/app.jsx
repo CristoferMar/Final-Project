@@ -40,6 +40,7 @@ export default class App extends React.Component {
 
   handleSignIn() {
     this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+    window.location.hash = '#My-Lists';
   }
 
   handleSignOut() {
@@ -56,7 +57,7 @@ export default class App extends React.Component {
       } else {
         window.location.hash = '';
       }
-    } else { window.location.hash = '#My-Lists'; }
+    } else if (!isAuthorizing && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }

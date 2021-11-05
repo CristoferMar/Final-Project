@@ -111,6 +111,7 @@ app.get('/api/lists', (req, res, next) => {
 });
 
 app.post('/api/lists', (req, res, next) => {
+  const { userId } = req.user;
   const { listName } = req.body;
   if (!listName) {
     throw new ClientError(400, 'A valid listName is required');
@@ -122,10 +123,10 @@ app.post('/api/lists', (req, res, next) => {
 
   const sql = `
     insert into "lists" ("listTitle", "userId")
-    values ($1, 1)
+    values ($1, $2)
     returning "listTitle", "listId"
   `;
-  const params = [listName];
+  const params = [listName, userId];
 
   db.query(sql, params)
     .then(result => {
