@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import AppContext from '../lib/app-context';
 
 export default function ListItem(props) {
 
@@ -47,5 +46,3 @@ export default function ListItem(props) {
       </div>
   );
 }
-
-// ListItem.contextType = AppContext;

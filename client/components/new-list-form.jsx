@@ -73,6 +73,3 @@ export default class NewListForm extends React.Component {
 }
 
 NewListForm.contextType = AppContext;
-
-// import AppContext from '../lib/app-context';
-// NewListForm.contextType = AppContext;

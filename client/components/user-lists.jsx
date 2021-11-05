@@ -11,10 +11,7 @@ export default class UserLists extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this.context.token:', this.context.token);
     const { token } = this.context.token;
-    console.log('just the token:', token);
-
     const req = {
       method: 'GET',
       headers: {
