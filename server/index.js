@@ -273,6 +273,7 @@ app.patch('/api/dateActive/:dateId', (req, res, next) => {
       from "lists"
       where "lists"."userId" = $1
       and "dates"."dateId" = $2
+      and "dates"."listId" = "lists"."listId"
   `;
   const params = [userId, dateId];
   db.query(sql, params)
