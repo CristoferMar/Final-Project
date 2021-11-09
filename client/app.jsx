@@ -11,15 +11,6 @@ import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
 
-// This is what any given token looks like:
-// {
-//    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ3LCJ1c2VybmFtZSI6InlvWDMiLCJpYXQiOjE2MzQ2ODY3ODB9.pDXNIQPcAV6nIjh7ho_zQ1gVPK5VayeegTiOJEldQ6I",
-//    "user": {
-//        "userId": 47,
-//        "username": "yoX3"
-//     }
-// }
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -82,18 +73,11 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
-    // const user = token ? token.username : null;
-    // const userFirstLetter = token ?
-    // if (this.state.isAuthorizing) return null;
-    // const { user, route } = this.state;
-    // const { handleSignIn, handleSignOut } = this;
-
     const token = this.state.token ? this.state.token : null;
     const contextValue = { token };
 
     return (
       <AppContext.Provider value={contextValue}>
-      {/* <> */}
         {withNav &&
           <Navbar path={path} signOutHandler={this.handleSignOut} />
         }
@@ -101,10 +85,7 @@ export default class App extends React.Component {
         <div className={pageClass}>
           {this.renderPage(this.state.route)}
         </div>
-      {/* </> */}
       </AppContext.Provider>
     );
   }
 }
-
-// App.contextType = AppContext;
