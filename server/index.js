@@ -262,16 +262,19 @@ app.get('/api/history', (req, res, next) => {
 });
 
 app.patch('/api/dateActive/:dateId', (req, res, next) => {
+  const { userId } = req.user;
   let { dateId } = req.params;
   dateId = parseInt(dateId);
   if (!Number.isInteger(dateId)) {
     throw new ClientError(400, 'The userId must be a positive integer.');
   }
   const sql = `
-  update "dates" SET "isActive" = NOT "isActive"
-  where "dateId" = $1
+  update "dates" set "isActive" = not "isActive"
+    from "lists"
+    where "lists"."userId" = $1
+    and "dates"."dateId" = $2
   `;
-  const params = [dateId];
+  const params = [userId, dateId];
   db.query(sql, params)
     .then(result => {
       res.sendStatus(204);
