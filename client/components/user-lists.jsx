@@ -49,9 +49,7 @@ export default class UserLists extends React.Component {
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
                 <p id={listItem.listId} className="width-76-percent click">
-                  <a href={`#Read-List?listId=${listItem.listId}`}>
-                    {listItem.listTitle}
-                  </a>
+                  <a href={`#Read-List?listId=${listItem.listId}`}>{listItem.listTitle}</a>
                 </p>
                 <div className="center-content align-center max-height-31">
                   <p className="font-light-responsive center-content align-center">

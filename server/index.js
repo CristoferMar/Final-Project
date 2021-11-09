@@ -32,12 +32,12 @@ app.post('/api/auth/sign-up', (req, res, next) => {
   argon2.hash(password)
     .then(hash => {
       const sql = `
-      insert into
-      "users" ("userName", "password")
-      values ($1, $2)
-      on conflict ("userName")
-      do nothing
-      returning "userId", "userName", "createdAt"
+        insert into
+          "users" ("userName", "password")
+          values ($1, $2)
+          on conflict ("userName")
+          do nothing
+          returning "userId", "userName", "createdAt"
       `;
       const params = [username, hash];
       db.query(sql, params)
@@ -60,9 +60,9 @@ app.post('/api/auth/sign-in', (req, res, next) => {
   }
 
   const sql = `
-  select "userId", "password"
-  from "users"
-  where "userName" = $1
+    select "userId", "password"
+      from "users"
+      where "userName" = $1
   `;
   const params = [username];
 
@@ -180,9 +180,9 @@ app.post('/api/dates', (req, res, next) => {
          and "listId" = $2
     )
     insert into "dates" ("listId", "dateIdea", "costAmount")
-    select $2, $3, $4
-    where exists (select * from "userList")
-    returning "listId", "dateId", "dateIdea", "costAmount";
+      select $2, $3, $4
+      where exists (select * from "userList")
+      returning "listId", "dateId", "dateIdea", "costAmount";
   `;
   const params = [userId, listId, dateIdea, costAmount];
 
@@ -269,10 +269,10 @@ app.patch('/api/dateActive/:dateId', (req, res, next) => {
     throw new ClientError(400, 'The userId must be a positive integer.');
   }
   const sql = `
-  update "dates" set "isActive" = not "isActive"
-    from "lists"
-    where "lists"."userId" = $1
-    and "dates"."dateId" = $2
+    update "dates" set "isActive" = not "isActive"
+      from "lists"
+      where "lists"."userId" = $1
+      and "dates"."dateId" = $2
   `;
   const params = [userId, dateId];
   db.query(sql, params)

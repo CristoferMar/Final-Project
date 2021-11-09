@@ -31,10 +31,10 @@ export default function ListItem(props) {
   return (
       <div className="flex full-width space-between">
 
-      <a className="flex click" onClick={e => { e.preventDefault(); setIsActive(); }}>
-        <img className="margin-right-10" src={imgURL} alt={imgAlt} />
-        <p className={`full-width${strikeClass}`} >{props.dateInfo.dateIdea}</p>
-      </a>
+        <a className="flex click" onClick={e => { e.preventDefault(); setIsActive(); }}>
+          <img className="margin-right-10" src={imgURL} alt={imgAlt} />
+          <p className={`full-width${strikeClass}`} >{props.dateInfo.dateIdea}</p>
+        </a>
 
         <div className="center-content align-center max-height-31">
           <img className="height-17" src="/images/cost-icon.svg" alt="configure list" />

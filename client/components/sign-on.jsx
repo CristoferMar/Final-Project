@@ -87,15 +87,12 @@ export default class SignOn extends React.Component {
         </div>
 
         <div className="margin-top full-width center-content align-center ">
-
           <form onSubmit={this.handleSubmit} action="" className="flex align-center column register-border space-between">
             <img className="small-logo" src="/images/small-logo.svg" alt="One Two Date" />
             <h3 className="sign-on-title">{this.state.isLogIn ? 'Log into 1.2..Date' : 'Create An Account'}</h3>
             <div className="full-width">
-
               <label htmlFor="userName">User Name</label>
               <input value={this.state.userName} onChange={this.handleChange} autoFocus name="userName" type="text" id="userName" required className="text-box margin-bottom-7rm" maxLength="30" />
-
               <label htmlFor="userPassword">Password</label>
               <input value={this.state.userPassword} onChange={this.handleChange} name="userPassword" maxLength="30" type="password" id="userPassword" required className="text-box margin-bottom-7rm" />
             </div>
@@ -103,7 +100,6 @@ export default class SignOn extends React.Component {
               <button className="float-right login-btn blue-fill white width-80px click">{this.state.isLogIn ? 'Sign In' : 'Sign Up'}</button>
             </div>
           </form>
-
         </div>
       </>
     );

@@ -75,7 +75,7 @@ export default class ListDetails extends React.Component {
         {
           listTitle === undefined &&
             <>
-              <div className="padding-vert-10n25" >This list ID is not available</div>
+              <div className="padding-vert-10n25">This list ID is not available</div>
               <a href="#My-Lists" className="center-content align-center">
                 <img className="height-25 click" src="/images/tri-colored-back-arrow.svg" alt="add new list" />
                 <span className="margin-left-5">Return to My Lists?</span>
