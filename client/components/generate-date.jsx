@@ -10,8 +10,7 @@ export default class GenerateDate extends React.Component {
       listChoiseId: '',
       costAmount: '0',
       randomDate: [],
-      randomHasLoaded: false,
-      token: null
+      randomHasLoaded: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,12 +19,10 @@ export default class GenerateDate extends React.Component {
   }
 
   componentDidMount() {
-    const { token } = this.context.token;
-    this.setState({ token });
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${token}`,
+        'x-access-token': `${this.context.token.token}`,
         'Content-Type': 'application/json'
       }
     };
@@ -50,7 +47,7 @@ export default class GenerateDate extends React.Component {
     const req = {
       method: 'POST',
       headers: {
-        'x-access-token': `${this.state.token}`,
+        'x-access-token': `${this.context.token.token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -67,7 +64,7 @@ export default class GenerateDate extends React.Component {
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${this.state.token}`,
+        'x-access-token': `${this.context.token.token}`,
         'Content-Type': 'application/json'
       }
     };

@@ -11,11 +11,10 @@ export default class UserLists extends React.Component {
   }
 
   componentDidMount() {
-    const { token } = this.context.token;
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${token}`,
+        'x-access-token': `${this.context.token.token}`,
         'Content-Type': 'application/json'
       }
     };

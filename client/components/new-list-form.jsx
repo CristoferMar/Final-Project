@@ -24,12 +24,10 @@ export default class NewListForm extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-    const { token } = this.context.token;
-
     const req = {
       method: 'POST',
       headers: {
-        'x-access-token': `${token}`,
+        'x-access-token': `${this.context.token.token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
