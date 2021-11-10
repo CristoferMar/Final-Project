@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class NewListForm extends React.Component {
   constructor(props) {
@@ -25,7 +26,10 @@ export default class NewListForm extends React.Component {
     event.preventDefault();
     const req = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         listName: this.state.listName
       })
@@ -65,3 +69,5 @@ export default class NewListForm extends React.Component {
     );
   }
 }
+
+NewListForm.contextType = AppContext;

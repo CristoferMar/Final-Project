@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class UserLists extends React.Component {
   constructor(props) {
@@ -12,7 +13,10 @@ export default class UserLists extends React.Component {
   componentDidMount() {
     const req = {
       method: 'GET',
-      header: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch('/api/lists', req)
       .then(res => res.json())
@@ -39,14 +43,12 @@ export default class UserLists extends React.Component {
           </div>
         }
         {
-          this.state.userLists.length &&
+          (this.state.userLists.length > 0 && this.state.listsHaveLoaded) &&
           this.state.userLists.map(listItem =>
             <div key={listItem.listId} className="padding-top-5">
               <div className="flex full-width space-between">
                 <p id={listItem.listId} className="width-76-percent click">
-                  <a href={`#Read-List?listId=${listItem.listId}`}>
-                    {listItem.listTitle}
-                  </a>
+                  <a href={`#Read-List?listId=${listItem.listId}`}>{listItem.listTitle}</a>
                 </p>
                 <div className="center-content align-center max-height-31">
                   <p className="font-light-responsive center-content align-center">
@@ -62,3 +64,5 @@ export default class UserLists extends React.Component {
     );
   }
 }
+
+UserLists.contextType = AppContext;

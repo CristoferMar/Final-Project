@@ -1,7 +1,8 @@
 import React from 'react';
+import parseRoute from './lib/parse-route';
+import AppContext from './lib/app-context';
 import Navbar from './components/nav-bar';
 import UserLists from './components/user-lists';
-import parseRoute from './lib/parse-route';
 import NewListForm from './components/new-list-form';
 import NewDateForm from './components/new-date-form';
 import ListDetails from './components/list-details';
@@ -14,8 +15,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
+      isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -24,14 +29,26 @@ export default class App extends React.Component {
     });
   }
 
+  handleSignIn() {
+    this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+    window.location.hash = '#My-Lists';
+  }
+
+  handleSignOut() {
+    this.setState({ isAuthorizing: true, token: null });
+  }
+
   renderPage() {
-    const route = this.state.route;
-    if (route.path === '') {
-      return <Lander />;
-    }
-    if (route.path === 'Sign-Up' || route.path === 'Log-In') {
-      return <SignOn />;
-    }
+    const { isAuthorizing, route } = this.state;
+    if (isAuthorizing) {
+      if (route.path === '') {
+        return <Lander />;
+      } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
+        return <SignOn signInHandler={this.handleSignIn}/>;
+      } else {
+        window.location.hash = '';
+      }
+    } else if (!isAuthorizing && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
@@ -56,16 +73,19 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
+    const token = this.state.token ? this.state.token : null;
+    const contextValue = { token };
+
     return (
-      <>
+      <AppContext.Provider value={contextValue}>
         {withNav &&
-          <Navbar path={path} />
+          <Navbar path={path} signOutHandler={this.handleSignOut} />
         }
 
         <div className={pageClass}>
           {this.renderPage(this.state.route)}
         </div>
-      </>
+      </AppContext.Provider>
     );
   }
 }

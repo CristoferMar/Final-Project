@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class GenerateDate extends React.Component {
   constructor(props) {
@@ -20,7 +21,10 @@ export default class GenerateDate extends React.Component {
   componentDidMount() {
     const req = {
       method: 'GET',
-      header: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch('/api/lists', req)
       .then(res => res.json())
@@ -42,9 +46,11 @@ export default class GenerateDate extends React.Component {
     event.preventDefault();
     const req = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
-        userId: 1,
         dateId: this.state.randomDate[0].dateId
       })
     };
@@ -57,7 +63,10 @@ export default class GenerateDate extends React.Component {
     event.preventDefault();
     const req = {
       method: 'GET',
-      header: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch(`/api/random?costAmount=${this.state.costAmount}&listId=${this.state.listChoiseId}`, req)
       .then(res => res.json())
@@ -158,3 +167,5 @@ export default class GenerateDate extends React.Component {
     );
   }
 }
+
+GenerateDate.contextType = AppContext;

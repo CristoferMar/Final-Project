@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItem from './list-item';
+import AppContext from '../lib/app-context';
 
 export default class ListDetails extends React.Component {
   constructor(props) {
@@ -12,7 +13,10 @@ export default class ListDetails extends React.Component {
   componentDidMount() {
     const req = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch(`/api/dates/${this.props.listId}`, req)
       .then(res => res.json())
@@ -60,14 +64,14 @@ export default class ListDetails extends React.Component {
           dateIdeas && dateIdeas[0] &&
             dateIdeas.map(item =>
               <div key={item.dateId} id={item.dateId} className="padding-top-5">
-                <ListItem dateInfo={item} />
+                <ListItem dateInfo={item} token={this.context.token.token} />
               </div>
             )
         }
         {
           listTitle === undefined &&
             <>
-              <div className="padding-vert-10n25" >This list ID is not available</div>
+              <div className="padding-vert-10n25">This list ID is not available</div>
               <a href="#My-Lists" className="center-content align-center">
                 <img className="height-25 click" src="/images/tri-colored-back-arrow.svg" alt="add new list" />
                 <span className="margin-left-5">Return to My Lists?</span>
@@ -78,3 +82,5 @@ export default class ListDetails extends React.Component {
     );
   }
 }
+
+ListDetails.contextType = AppContext;

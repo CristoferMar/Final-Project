@@ -1,12 +1,6 @@
 import React from 'react';
 
 export default class Lander extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'cris'
-    };
-  }
 
   render() {
     return (

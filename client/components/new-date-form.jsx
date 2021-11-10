@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class NewDateForm extends React.Component {
   constructor(props) {
@@ -26,7 +27,10 @@ export default class NewDateForm extends React.Component {
     event.preventDefault();
     const req = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         dateIdea: this.state.dateIdea,
         costAmount: this.state.costAmount,
@@ -94,3 +98,5 @@ export default class NewDateForm extends React.Component {
     );
   }
 }
+
+NewDateForm.contextType = AppContext;

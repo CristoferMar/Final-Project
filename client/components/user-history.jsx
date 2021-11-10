@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class UserHistory extends React.Component {
   constructor(props) {
@@ -13,7 +14,10 @@ export default class UserHistory extends React.Component {
   componentDidMount() {
     const req = {
       method: 'GET',
-      header: { 'Content-Type': 'application/json' }
+      headers: {
+        'x-access-token': `${this.context.token.token}`,
+        'Content-Type': 'application/json'
+      }
     };
     fetch('api/history', req)
       .then(res => res.json())
@@ -70,3 +74,5 @@ export default class UserHistory extends React.Component {
     );
   }
 }
+
+UserHistory.contextType = AppContext;
