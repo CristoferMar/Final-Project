@@ -17,7 +17,8 @@ export default class App extends React.Component {
     this.state = {
       token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
       isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      online: navigator.onLine
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -27,6 +28,8 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+    window.addEventListener('offline', () => this.setState({ online: navigator.onLine }));
+    window.addEventListener('online', () => this.setState({ online: navigator.onLine }));
   }
 
   handleSignIn() {
@@ -73,8 +76,9 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
+    const online = navigator.onLine;
     const token = this.state.token ? this.state.token : null;
-    const contextValue = { token };
+    const contextValue = { token, online };
 
     return (
       <AppContext.Provider value={contextValue}>
@@ -83,7 +87,13 @@ export default class App extends React.Component {
         }
 
         <div className={pageClass}>
-          {this.renderPage(this.state.route)}
+          {this.state.online
+            ? this.renderPage(this.state.route)
+            : <div className='center-content column'>
+              <h1 className="form-title">AHHHH! Whats happening?</h1>
+              Oh wait, your internet went out. Can you check on that, please?
+            </div>
+          }
         </div>
       </AppContext.Provider>
     );
