@@ -19,7 +19,7 @@ export default class App extends React.Component {
       token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
       isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
       route: parseRoute(window.location.hash),
-      online: navigator.onLine
+      onlineCheck: true
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -29,8 +29,7 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-    window.addEventListener('offline', () => this.setState({ online: navigator.onLine }));
-    window.addEventListener('online', () => this.setState({ online: navigator.onLine }));
+    window.addEventListener('online', () => this.setState({ onlineCheck: true }));
   }
 
   handleSignIn() {
@@ -74,6 +73,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    const onlineTest = navigator.onLine;
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
@@ -88,7 +88,7 @@ export default class App extends React.Component {
         }
 
         <div className={pageClass}>
-          {this.state.online
+          {onlineTest
             ? this.renderPage(this.state.route)
             : <ConnectionLost />
           }
