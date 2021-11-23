@@ -10,6 +10,7 @@ import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
+import ConnectionLost from './components/connection-lost';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -89,10 +90,7 @@ export default class App extends React.Component {
         <div className={pageClass}>
           {this.state.online
             ? this.renderPage(this.state.route)
-            : <div className='center-content column'>
-              <h1 className="form-title">AHHHH! Whats happening?</h1>
-              Oh wait, your internet went out. Can you check on that, please?
-            </div>
+            : <ConnectionLost />
           }
         </div>
       </AppContext.Provider>

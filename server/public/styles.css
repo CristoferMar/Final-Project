@@ -41,6 +41,10 @@
   margin-bottom: 0.7rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .register-border {
   border: 1px solid white;
   border-radius: 10px;
