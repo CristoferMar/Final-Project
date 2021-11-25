@@ -45,9 +45,9 @@ export default class App extends React.Component {
     const { isAuthorizing, route } = this.state;
     if (isAuthorizing) {
       if (route.path === '') {
-        return <Lander />;
+        return <Lander signInHandler={this.handleSignIn} />;
       } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
-        return <SignOn signInHandler={this.handleSignIn}/>;
+        return <SignOn signInHandler={this.handleSignIn} />;
       } else {
         window.location.hash = '';
       }

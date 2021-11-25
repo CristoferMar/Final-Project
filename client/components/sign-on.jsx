@@ -68,7 +68,6 @@ export default class SignOn extends React.Component {
   }
 
   changePage(event) {
-    event.preventDefault();
     this.setState({
       isLogIn: !this.state.isLogIn,
       newUser: !this.state.newUser,
