@@ -1,4 +1,5 @@
 import React from 'react';
+import DemoUser from './demo-user';
 
 export default class SignOn extends React.Component {
   constructor(props) {
@@ -82,7 +83,7 @@ export default class SignOn extends React.Component {
       <>
         <div className="absolute-login float-right">
           <button onClick={this.changePage} className="width-80px white login-btn blue-fill margin-right-10 click">{this.state.isLogIn ? 'Sign Up' : 'Log In'}</button>
-          <button className="white login-btn blue-fill click">Demo User</button>
+          <DemoUser handleSignOn={this.props.signInHandler} />
         </div>
 
         <div className="margin-top full-width center-content align-center ">
