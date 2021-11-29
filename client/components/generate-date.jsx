@@ -30,11 +30,18 @@ export default class GenerateDate extends React.Component {
     fetch('/api/lists', req)
       .then(res => res.json())
       .then(userLists => {
-        this.setState({
-          userLists,
-          listsHaveLoaded: true,
-          listChoiseId: userLists[0].listId.toString()
-        });
+        if (userLists.length) {
+          this.setState({
+            listsHaveLoaded: true,
+            userLists,
+            listChoiseId: userLists[0].listId.toString()
+          });
+        } else {
+          this.setState({
+            listsHaveLoaded: true,
+            userLists
+          });
+        }
       })
       .catch(err => console.error(err));
   }
@@ -83,6 +90,7 @@ export default class GenerateDate extends React.Component {
   }
 
   render() {
+
     return (
       <>
         <div className="full-width full-height-nim-nav center-content align-center">
@@ -93,22 +101,21 @@ export default class GenerateDate extends React.Component {
                 <div className="form-container border-white">
                 {this.state.listsHaveLoaded
                   ? <>
-                  <label htmlFor="listChoiseId">Which list are we using?</label>
-                    <select name="listChoiseId" id="listChoiseId"
-                      className="text-box margin-bottom-7rm"
-                      defaultValue={this.state.listChoiseId}
-                      onChange={this.handleChange}>
-                    { (!this.state.userLists.length && this.state.listsHaveLoaded) &&
-                      <option value="nullList">It seems you don&rsquo;t have any lists</option>
+                    {this.state.userLists.length > 0
+                      ? <>
+                        <label htmlFor="listChoiseId">Which list are we using?</label>
+                        <select name="listChoiseId" id="listChoiseId"
+                          className="text-box margin-bottom-7rm"
+                          defaultValue={this.state.listChoiseId}
+                          onChange={this.handleChange}>
+                          {this.state.userLists.map(listItem => <option key={listItem.listId} value={listItem.listId}>{listItem.listTitle}</option>)}
+                        </select>
+                      </>
+                      : <div>
+                        <p>You don&rsquo;t have any lists.</p>
+                        <p>Try adding one on the <a href="#My-Lists">My Lists</a> page</p>
+                      </div>
                     }
-                    {this.state.userLists.length &&
-                      this.state.userLists.map(listItem =>
-                        <option key={listItem.listId} value={listItem.listId}>
-                        {listItem.listTitle}
-                        </option>
-                      )
-                    }
-                  </select>
                   <div className="flex align-center space-between">
                     <label htmlFor="costAmount">Cost Estimate</label>
                     <select
@@ -136,11 +143,13 @@ export default class GenerateDate extends React.Component {
                 }
                 </div>
               </div>
-            <div className="full-width fixed">
-              <button className="height-70 purple-fill click-up generate-btn">
-                Generate Date
-              </button>
-            </div>
+            {this.state.userLists.length > 0 &&
+              <div className="full-width fixed">
+                <button className="height-70 purple-fill click-up generate-btn">
+                  Generate Date
+                </button>
+              </div>
+            }
           </form>
         }
 
@@ -170,7 +179,7 @@ export default class GenerateDate extends React.Component {
         {(this.state.viewingDraw && !this.state.randomDate.length) &&
           <div className="form-container">
             <h3 className="form-title">No Results</h3>
-              <p className="form-title">This list may be empty or no checked items have that cost.</p>
+            <p className="form-title">This list may be empty or no checked items have that cost.</p>
             <p className="form-title">You can add or review the dates/items to this list in your <a href={`#Read-List?listId=${this.state.listChoiseId}`} className="blue">Read-Lists</a> page.</p>
             <div>
               <button className="form-btn purple-fill full-width click" onClick={this.handleReturn}>Go back to Generator?</button>
