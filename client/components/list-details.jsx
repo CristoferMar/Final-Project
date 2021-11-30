@@ -65,14 +65,14 @@ export default class ListDetails extends React.Component {
               </>
             }
 
-            {dateIdeas && dateIdeas[0] &&
+           {(dateIdeas && dateIdeas[0]) &&
               dateIdeas.map(item =>
                 <div key={item.dateId} id={item.dateId} className="padding-top-5">
                   <ListItem dateInfo={item} token={this.context.token.token} />
                 </div>
               )
             }
-            {dateIdeas && !dateIdeas[0] &&
+            {(dateIdeas && !dateIdeas[0]) &&
               <div className="content-center full-width padding-10">
                 You have no dates or items in this list.
               </div>

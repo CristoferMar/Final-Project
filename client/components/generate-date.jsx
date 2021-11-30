@@ -110,32 +110,33 @@ export default class GenerateDate extends React.Component {
                           onChange={this.handleChange}>
                           {this.state.userLists.map(listItem => <option key={listItem.listId} value={listItem.listId}>{listItem.listTitle}</option>)}
                         </select>
+                        <div className="flex align-center space-between">
+                          <label htmlFor="costAmount">Cost Estimate</label>
+                          <select
+                            className="text-box width-55-percent"
+                            name="costAmount"
+                            id="costAmount"
+                            required
+                            onChange={this.handleChange}>
+                            <option value="0">Free</option>
+                            <option value="10">Less than $10</option>
+                            <option value="20">Around $20</option>
+                            <option value="40">Around $40</option>
+                            <option value="60">Around $60</option>
+                            <option value="80">Around $80</option>
+                            <option value="120">Around $120</option>
+                            <option value="200">Around $200</option>
+                            <option value="300">Around $300</option>
+                            <option value="400">The High Life</option>
+                          </select>
+                        </div>
                       </>
-                      : <div>
-                        <p>You don&rsquo;t have any lists.</p>
-                        <p>Try adding one on the <a href="#My-Lists">My Lists</a> page</p>
+                      : <div className="full-width text-center">
+                        <h3 className="form-title">You don&rsquo;t have any lists.</h3>
+                        <p className="font-small">Try adding one on your <a href="#My-Lists" className="click blue">My Lists</a> page</p>
                       </div>
                     }
-                  <div className="flex align-center space-between">
-                    <label htmlFor="costAmount">Cost Estimate</label>
-                    <select
-                      className="text-box width-55-percent"
-                      name="costAmount"
-                      id="costAmount"
-                      required
-                      onChange={this.handleChange}>
-                      <option value="0">Free</option>
-                      <option value="10">Less than $10</option>
-                      <option value="20">Around $20</option>
-                      <option value="40">Around $40</option>
-                      <option value="60">Around $60</option>
-                      <option value="80">Around $80</option>
-                      <option value="120">Around $120</option>
-                      <option value="200">Around $200</option>
-                      <option value="300">Around $300</option>
-                      <option value="400">The High Life</option>
-                    </select>
-                    </div>
+
                     </>
                   : <div className="full-width center-content">
                     <div className="lds-dual-ring"></div>

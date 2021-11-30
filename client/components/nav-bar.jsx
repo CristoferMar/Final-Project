@@ -20,9 +20,10 @@ export default class Navbar extends React.Component {
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('one-two-date-jwt');
-    this.props.signOutHandler();
     window.location.hash = '';
+    this.props.signOutHandler();
+    window.localStorage.removeItem('one-two-date-jwt');
+    console.log("We're still running");
   }
 
   handleClick() {

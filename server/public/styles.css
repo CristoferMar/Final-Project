@@ -151,16 +151,12 @@
   color: #ed105b;
 }
 
-.click {
+.click .click-up {
   cursor: pointer;
 }
 
 .click:active {
   transform: translateY(2px);
-}
-
-.click-up {
-  cursor: pointer;
 }
 
 .click-up:active {
