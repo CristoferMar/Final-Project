@@ -151,7 +151,8 @@
   color: #ed105b;
 }
 
-.click .click-up {
+.click,
+.click-up {
   cursor: pointer;
 }
 
