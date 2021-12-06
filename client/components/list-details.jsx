@@ -26,13 +26,15 @@ export default class ListDetails extends React.Component {
   }
 
   render() {
+    if (!this.context.token) return null;
     let listTitle = null;
     let dateIdeas = null;
     let listId = null;
-    if (this.state.listData.listTitle !== undefined) {
-      listTitle = this.state.listData.listTitle;
-      dateIdeas = this.state.listData.dateIdeas;
-      listId = this.state.listData.listId;
+    if (Object.keys(this.state.listData).length) {
+      const listData = this.state.listData;
+      listTitle = listData.listTitle;
+      dateIdeas = listData.dateIdeas;
+      listId = listData.listId;
     }
 
     return (

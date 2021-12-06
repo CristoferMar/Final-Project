@@ -38,6 +38,7 @@ export default class App extends React.Component {
   }
 
   handleSignOut() {
+    window.localStorage.removeItem('one-two-date-jwt');
     this.setState({ isAuthorizing: true, token: null });
   }
 
