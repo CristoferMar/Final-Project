@@ -17,7 +17,6 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
-      isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
       route: parseRoute(window.location.hash),
       onlineCheck: true
     };
@@ -33,26 +32,27 @@ export default class App extends React.Component {
   }
 
   handleSignIn() {
-    this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+    this.setState({ token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
     window.location.hash = '#My-Lists';
   }
 
   handleSignOut() {
     window.localStorage.removeItem('one-two-date-jwt');
-    this.setState({ isAuthorizing: true, token: null });
+    this.setState({ token: null });
   }
 
   renderPage() {
-    const { isAuthorizing, route } = this.state;
-    if (isAuthorizing) {
+    const { token, route } = this.state;
+    if (!token) {
       if (route.path === '') {
         return <Lander signInHandler={this.handleSignIn} />;
       } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
         return <SignOn signInHandler={this.handleSignIn} />;
       } else {
         window.location.hash = '';
+        return <Lander signInHandler={this.handleSignIn} />;
       }
-    } else if (!isAuthorizing && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
+    } else if (token && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
