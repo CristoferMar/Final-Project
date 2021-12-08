@@ -10,14 +10,15 @@ import GenerateDate from './components/generate-date';
 import UserHistory from './components/user-history';
 import Lander from './components/landing-page';
 import SignOn from './components/sign-on';
+import ConnectionLost from './components/connection-lost';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
-      isAuthorizing: window.localStorage.getItem('one-two-date-jwt') === null,
-      route: parseRoute(window.location.hash)
+      userInfo: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
+      route: parseRoute(window.location.hash),
+      onlineCheck: true
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -27,28 +28,31 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+    window.addEventListener('online', () => this.setState({ onlineCheck: true }));
   }
 
   handleSignIn() {
-    this.setState({ isAuthorizing: false, token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+    this.setState({ userInfo: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
     window.location.hash = '#My-Lists';
   }
 
   handleSignOut() {
-    this.setState({ isAuthorizing: true, token: null });
+    window.localStorage.removeItem('one-two-date-jwt');
+    this.setState({ userInfo: null });
   }
 
   renderPage() {
-    const { isAuthorizing, route } = this.state;
-    if (isAuthorizing) {
+    const { userInfo, route } = this.state;
+    if (!userInfo) {
       if (route.path === '') {
-        return <Lander />;
+        return <Lander signInHandler={this.handleSignIn} />;
       } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
-        return <SignOn signInHandler={this.handleSignIn}/>;
+        return <SignOn signInHandler={this.handleSignIn} />;
       } else {
         window.location.hash = '';
+        return <Lander signInHandler={this.handleSignIn} />;
       }
-    } else if (!isAuthorizing && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
+    } else if (userInfo && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
@@ -70,11 +74,13 @@ export default class App extends React.Component {
   }
 
   render() {
+    const onlineTest = navigator.onLine;
     const { path } = this.state.route;
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
-    const token = this.state.token ? this.state.token : null;
-    const contextValue = { token };
+    const online = navigator.onLine;
+    const userInfo = this.state.userInfo ? this.state.userInfo : null;
+    const contextValue = { userInfo, online };
 
     return (
       <AppContext.Provider value={contextValue}>
@@ -83,7 +89,10 @@ export default class App extends React.Component {
         }
 
         <div className={pageClass}>
-          {this.renderPage(this.state.route)}
+          {onlineTest
+            ? this.renderPage(this.state.route)
+            : <ConnectionLost />
+          }
         </div>
       </AppContext.Provider>
     );

@@ -14,7 +14,7 @@ export default class UserLists extends React.Component {
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${this.context.token.token}`,
+        'x-access-token': `${this.context.userInfo.token}`,
         'Content-Type': 'application/json'
       }
     };
@@ -36,29 +36,32 @@ export default class UserLists extends React.Component {
           </a>
         </div>
 
-        {
-          (!this.state.userLists.length && this.state.listsHaveLoaded) &&
-          <div className="content-center full-width padding-10">
-            You have no lists at the moment.
-          </div>
-        }
-        {
-          (this.state.userLists.length > 0 && this.state.listsHaveLoaded) &&
-          this.state.userLists.map(listItem =>
-            <div key={listItem.listId} className="padding-top-5">
-              <div className="flex full-width space-between">
-                <p id={listItem.listId} className="width-76-percent click">
-                  <a href={`#Read-List?listId=${listItem.listId}`}>{listItem.listTitle}</a>
-                </p>
-                <div className="center-content align-center max-height-31">
-                  <p className="font-light-responsive center-content align-center">
-                    {2500 + ' Items'}
-                  </p>
-                  <img className="height-17 margin-left-5 click" src="/images/gear.svg" alt="configure list" />
+        {this.state.listsHaveLoaded
+          ? <>
+            {this.state.userLists.length
+              ? this.state.userLists.map(listItem =>
+                <div key={listItem.listId} className="padding-top-5">
+                  <div className="flex full-width space-between">
+                    <p id={listItem.listId} className="width-76-percent click">
+                      <a href={`#Read-List?listId=${listItem.listId}`}>{listItem.listTitle}</a>
+                    </p>
+                    <div className="center-content align-center max-height-31">
+                      <p className="font-light-responsive center-content align-center">
+                        {2500 + ' Items'}
+                      </p>
+                      <img className="height-17 margin-left-5 click" src="/images/gear.svg" alt="configure list" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )
+              : <div className="content-center full-width padding-10">
+                You have no lists at the moment.
+                </div>
+            }
+            </>
+          : <div className="full-width center-content">
+              <div className="lds-dual-ring"></div>
             </div>
-          )
         }
       </div>
     );

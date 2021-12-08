@@ -15,7 +15,7 @@ export default class UserHistory extends React.Component {
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${this.context.token.token}`,
+        'x-access-token': `${this.context.userInfo.token}`,
         'Content-Type': 'application/json'
       }
     };
