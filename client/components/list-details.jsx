@@ -15,7 +15,7 @@ export default class ListDetails extends React.Component {
     const req = {
       method: 'GET',
       headers: {
-        'x-access-token': `${this.context.token.token}`,
+        'x-access-token': `${this.context.userInfo.token}`,
         'Content-Type': 'application/json'
       }
     };
@@ -26,7 +26,7 @@ export default class ListDetails extends React.Component {
   }
 
   render() {
-    if (!this.context.token) return null;
+    if (!this.context.userInfo) return null;
     let listTitle = null;
     let dateIdeas = null;
     let listId = null;
@@ -70,7 +70,7 @@ export default class ListDetails extends React.Component {
            {(dateIdeas && dateIdeas[0]) &&
               dateIdeas.map(item =>
                 <div key={item.dateId} id={item.dateId} className="padding-top-5">
-                  <ListItem dateInfo={item} token={this.context.token.token} />
+                  <ListItem dateInfo={item} token={this.context.userInfo.token} />
                 </div>
               )
             }

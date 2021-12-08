@@ -16,7 +16,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
+      userInfo: JSON.parse(window.localStorage.getItem('one-two-date-jwt')),
       route: parseRoute(window.location.hash),
       onlineCheck: true
     };
@@ -32,18 +32,18 @@ export default class App extends React.Component {
   }
 
   handleSignIn() {
-    this.setState({ token: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
+    this.setState({ userInfo: JSON.parse(window.localStorage.getItem('one-two-date-jwt')) });
     window.location.hash = '#My-Lists';
   }
 
   handleSignOut() {
     window.localStorage.removeItem('one-two-date-jwt');
-    this.setState({ token: null });
+    this.setState({ userInfo: null });
   }
 
   renderPage() {
-    const { token, route } = this.state;
-    if (!token) {
+    const { userInfo, route } = this.state;
+    if (!userInfo) {
       if (route.path === '') {
         return <Lander signInHandler={this.handleSignIn} />;
       } else if (route.path === 'Sign-Up' || route.path === 'Log-In') {
@@ -52,7 +52,7 @@ export default class App extends React.Component {
         window.location.hash = '';
         return <Lander signInHandler={this.handleSignIn} />;
       }
-    } else if (token && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
+    } else if (userInfo && (route.path === '' || route.path === 'Sign-Up' || route.path === 'Log-In')) { window.location.hash = '#My-Lists'; }
     if (route.path === 'My-Lists') {
       return <UserLists />;
     }
@@ -79,8 +79,8 @@ export default class App extends React.Component {
     const withNav = !['New-List', 'New-Date', 'Langing-Page', '', 'Log-In', 'Sign-Up'].includes(path);
     const pageClass = withNav ? 'page with-navbar' : 'page';
     const online = navigator.onLine;
-    const token = this.state.token ? this.state.token : null;
-    const contextValue = { token, online };
+    const userInfo = this.state.userInfo ? this.state.userInfo : null;
+    const contextValue = { userInfo, online };
 
     return (
       <AppContext.Provider value={contextValue}>
