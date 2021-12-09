@@ -27,7 +27,7 @@ export default class NewListForm extends React.Component {
     const req = {
       method: 'POST',
       headers: {
-        'x-access-token': `${this.context.token.token}`,
+        'x-access-token': `${this.context.userInfo.token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
