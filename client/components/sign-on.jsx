@@ -85,6 +85,7 @@ export default class SignOn extends React.Component {
     const { nameTaken, invalidLogin } = this.state;
     const singUpBtn = !nameTaken ? 'Sign Up' : 'That user name is taken. Try again';
     const loginBtn = !invalidLogin ? 'Log In' : 'Invalid login. Please try again';
+    const refused = (nameTaken || invalidLogin) ? 'shake' : '';
     return (
       <>
         <div className="absolute-login float-right">
@@ -103,7 +104,7 @@ export default class SignOn extends React.Component {
               <input value={this.state.userPassword} onChange={this.handleChange} name="userPassword" maxLength="30" type="password" id="userPassword" required className="text-box margin-bottom-7rm" />
             </div>
             <div className="full-width">
-              <button className="float-right login-btn blue-fill white  click">{this.state.isLogIn ? loginBtn : singUpBtn}</button>
+              <button className={`float-right login-btn blue-fill white click ${refused}`}>{this.state.isLogIn ? loginBtn : singUpBtn}</button>
             </div>
           </form>
         </div>
