@@ -170,8 +170,8 @@ export default class GenerateDate extends React.Component {
               }
               </h2>
               <div className="center-content space-between full-width">
-                <button className="form-btn purple-fill click">Draw Again</button>
                 <button className="form-btn blue-fill click" onClick={this.saveHistory}>Let&rsquo;s Do This</button>
+                <button className="form-btn purple-fill click">Draw Again</button>
               </div>
             </form>
           </div>
