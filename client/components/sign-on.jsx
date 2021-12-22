@@ -10,7 +10,8 @@ export default class SignOn extends React.Component {
       userName: '',
       userPassword: '',
       nameTaken: false,
-      invalidLogin: false
+      invalidLogin: false,
+      refused: false
     };
     this.changePage = this.changePage.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,8 @@ export default class SignOn extends React.Component {
             this.setState({ newUser: false });
             this.handleSubmit();
           } else {
-            this.setState({ nameTaken: true, userName: '', userPassword: '' });
+            this.setState({ nameTaken: true, userName: '', userPassword: '', refused: true });
+            setTimeout(() => { this.setState({ refused: false }); }, 300);
           }
         })
         .catch(err => console.error(err));
@@ -54,7 +56,8 @@ export default class SignOn extends React.Component {
         .then(res => res.json())
         .then(result => {
           if (result.error) {
-            this.setState({ userPassword: '', invalidLogin: true });
+            this.setState({ userPassword: '', invalidLogin: true, refused: true });
+            setTimeout(() => { this.setState({ refused: false }); }, 300);
           } else {
             window.localStorage.setItem('one-two-date-jwt', JSON.stringify(result));
             this.props.signInHandler();
@@ -82,10 +85,10 @@ export default class SignOn extends React.Component {
   }
 
   render() {
-    const { nameTaken, invalidLogin } = this.state;
+    const { nameTaken, invalidLogin, refused } = this.state;
     const singUpBtn = !nameTaken ? 'Sign Up' : 'That user name is taken. Try again';
     const loginBtn = !invalidLogin ? 'Log In' : 'Invalid login. Please try again';
-    const refused = (nameTaken || invalidLogin) ? 'shake' : '';
+    const shake = refused ? 'shake' : '';
     return (
       <>
         <div className="absolute-login float-right">
@@ -104,7 +107,7 @@ export default class SignOn extends React.Component {
               <input value={this.state.userPassword} onChange={this.handleChange} name="userPassword" maxLength="30" type="password" id="userPassword" required className="text-box margin-bottom-7rm" />
             </div>
             <div className="full-width">
-              <button className={`float-right login-btn blue-fill white click ${refused}`}>{this.state.isLogIn ? loginBtn : singUpBtn}</button>
+              <button className={`float-right login-btn blue-fill white click ${shake}`}>{this.state.isLogIn ? loginBtn : singUpBtn}</button>
             </div>
           </form>
         </div>
