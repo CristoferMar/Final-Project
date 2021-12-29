@@ -1,7 +1,8 @@
 # OneTwoDate
 A full-stack solo project that allows couples to add different date ideas into unique lists and randomly pick activities from those lists.
 
-GIF
+![OneTwoDate-ReadMe-GIF](https://user-images.githubusercontent.com/82407007/147631149-30deae53-cb7f-4ffc-84af-84e26f1d1df9.gif
+
 
 ## Motivation
 Since learning how to code, I wanted to create an app that would be aesthetically pleasing and functional for everyone in more than one way. After learning how to implement a Node.js server and PostgreSQL databases, I was able to put my vision together and create this full-stack project. I've always been a fan of party games and keeping dates interesting with unexpected destinations. So why not make an app that could offer this and other uses to the client.
