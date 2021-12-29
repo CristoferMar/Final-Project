@@ -1,7 +1,7 @@
 # OneTwoDate
 A full-stack solo project that allows couples to add different date ideas into unique lists and randomly pick activities from those lists.
 
-![OneTwoDate-ReadMe-GIF](https://user-images.githubusercontent.com/82407007/147631149-30deae53-cb7f-4ffc-84af-84e26f1d1df9.gif
+![OneTwoDate-ReadMe-GIF](https://user-images.githubusercontent.com/82407007/147631193-6bc14458-1134-4ea4-a0fc-792ffce9582a.gif)
 
 
 ## Motivation
