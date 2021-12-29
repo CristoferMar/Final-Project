@@ -12,11 +12,13 @@ Since learning how to code, I wanted to create an app that would be aestheticall
 * Built using **React** for a responsive and dynamic front-end experience
 * Kept my styling as universal as possible by creating reusable **CSS** classes
 * Sent **API calls** to my server via **Fetch** requests
+
 **Server Side**
 * Implemented server side with **Express**
 * Managed user login authentication with **Argon2**, **JSON Web Tokens**, and **localStorage**
+
 **Database**
-* Used PostgreSQL database to store users, lists, date ideas, and history for each account
+* Used **PostgreSQL** database to store users, lists, date ideas, and history for each account
 
 ## Features
 **Current Features**
