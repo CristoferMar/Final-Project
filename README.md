@@ -3,6 +3,9 @@ A full-stack solo project that allows couples to add different date ideas into u
 
 ![OneTwoDate-ReadMe-GIF](https://user-images.githubusercontent.com/82407007/147631193-6bc14458-1134-4ea4-a0fc-792ffce9582a.gif)
 
+## Live
+Check out my app with the following link:
+[OneTwoDate](https://one-two-date.herokuapp.com/)
 
 ## Motivation
 Since learning how to code, I wanted to create an app that would be aesthetically pleasing and functional for everyone in more than one way. After learning how to implement a Node.js server and PostgreSQL databases, I was able to put my vision together and create this full-stack project. I've always been a fan of party games and keeping dates interesting with unexpected destinations. So why not make an app that could offer this and other uses to the client.
@@ -51,7 +54,3 @@ Since learning how to code, I wanted to create an app that would be aestheticall
 12. Run the command `npm run dev` to start the server and run the client as a live server.
 13. View the client in the browser at `localhost:3000`.
 14. To view the database on pgweb, open another terminal and run the command `pgweb --db=oneTwoDate`; then, open the browser to `localhost:8081`.
-
-## Live
-Check out my app with the following link:
-[OneTwoDate](https://one-two-date.herokuapp.com/)
