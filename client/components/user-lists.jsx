@@ -47,7 +47,7 @@ export default class UserLists extends React.Component {
                     </p>
                     <div className="center-content align-center max-height-31">
                       <p className="font-light-responsive center-content align-center">
-                        {2500 + ' Items'}
+                        {`${listItem.itemsCount} ${(listItem.itemsCount !== '1') ? 'Items' : 'Item'}`}
                       </p>
                       <img className="height-17 margin-left-5 click" src="/images/gear.svg" alt="configure list" />
                     </div>
