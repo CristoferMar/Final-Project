@@ -93,10 +93,11 @@ app.use(authorizationMiddleware);
 app.get('/api/lists', (req, res, next) => {
   const { userId } = req.user;
   const sql = `
-    select "listId", "listTitle", "isPublic"
-      from "lists"
+    select "l"."listId", "l"."listTitle", count("d"."dateId") as "itemsCount", "l"."isPublic"
+      from "lists" as "l"
+      left join "dates" as "d" using ("listId")
       where "userId" = $1
-      order by "listId" desc;
+      group by "l"."listId"
   `;
   const params = [userId];
   db.query(sql, params)
